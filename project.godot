@@ -11,7 +11,7 @@ config_version=4
 [application]
 
 config/name="Music Hell"
-run/main_scene="res://scenes/Protagonista.tscn"
+run/main_scene="res://scenes/main.tscn"
 config/icon="res://icon.png"
 
 [display]
@@ -37,7 +37,7 @@ texture={
 "compress/normal_map": 0,
 "detect_3d": false,
 "flags/anisotropic": false,
-"flags/filter": true,
+"flags/filter": false,
 "flags/mipmaps": false,
 "flags/repeat": 0,
 "flags/srgb": 2,
