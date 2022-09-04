@@ -1,8 +1,8 @@
 extends KinematicBody2D
 
 var velocity = Vector2()
-var ACCELERATION = 100
-var SPEED = 200
+var ACCELERATION = 10000
+var SPEED = 100
 
 onready var pivot = $Pivot
 onready var anim_player = $AnimationPlayer
@@ -20,13 +20,15 @@ func _ready():
 
 # warning-ignore:unused_argument
 func _physics_process(delta):
+	velocity = move_and_slide(velocity, Vector2.UP)
 	
 	# movimiento
-	var horizontal_move_input = Input.get_axis("move_left", "move_right")	
-	var vertical_move_input = Input.get_axis("move_up","move_down")
-	velocity.x = horizontal_move_input * SPEED
-	velocity.y = vertical_move_input * SPEED
-	velocity = move_and_slide(velocity, Vector2.UP)
+	var move_input = Vector2(
+		Input.get_axis("move_left", "move_right"),
+		Input.get_axis("move_up","move_down")
+	)
+
+	velocity = velocity.move_toward(move_input * SPEED, ACCELERATION * delta)
 	
 	# Animacion
 	if Input.is_action_pressed("move_right") and not Input.is_action_pressed("move_left"):
