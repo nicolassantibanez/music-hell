@@ -6,7 +6,7 @@
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
-height = 6.0
+height = 0.0
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -440,6 +440,7 @@ script = ExtResource( 2 )
 [node name="Pivot" type="Node2D" parent="."]
 
 [node name="Sprite" type="Sprite" parent="Pivot"]
+position = Vector2( 0, -3 )
 texture = ExtResource( 1 )
 hframes = 2
 vframes = 4
