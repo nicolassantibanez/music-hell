@@ -16,7 +16,7 @@ func _on_play_pressed():
 	get_tree().change_scene("res://scenes/level_01.tscn")
 
 func _on_credits_pressed():
-	pass
+	get_tree().change_scene("res://scenes/ui/credits.tscn")
 	
 func _on_controls_pressed():
 	pass
