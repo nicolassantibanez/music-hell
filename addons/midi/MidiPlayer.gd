@@ -770,19 +770,25 @@ func _process_track( ) -> int:
 		self.emit_signal( "midi_event", channel, event )
 
 		match event.type:
-			SMF.MIDIEventType.note_off:
+			SMF.MIDIEventType.note_off:	# id: 128
+#				print("MIDIEventType.note_off: ", SMF.MIDIEventType.note_off)
 				self._process_track_event_note_off( channel, ( event as SMF.MIDIEventNoteOff ).note )
-			SMF.MIDIEventType.note_on:
+			SMF.MIDIEventType.note_on:	# id: 144
+#				print("MIDIEventType.note_on: ", SMF.MIDIEventType.note_on)
 				var event_note_on:SMF.MIDIEventNoteOn = event as SMF.MIDIEventNoteOn
 				self._process_track_event_note_on( channel, event_note_on.note, event_note_on.velocity )
 			SMF.MIDIEventType.program_change:
+#				print("MIDIEventType.program_change: ", SMF.MIDIEventType.program_change)
 				channel.program = ( event as SMF.MIDIEventProgramChange ).number
 			SMF.MIDIEventType.control_change:
+#				print("MIDIEventType.control_change: ", SMF.MIDIEventType.control_change)
 				var event_control_change:SMF.MIDIEventControlChange = event as SMF.MIDIEventControlChange
 				self._process_track_event_control_change( channel, event_control_change.number, event_control_change.value )
 			SMF.MIDIEventType.pitch_bend:
+#				print("MIDIEventType.pitch_bend: ", SMF.MIDIEventType.pitch_bend)
 				self._process_pitch_bend( channel, ( event as SMF.MIDIEventPitchBend ).value )
 			SMF.MIDIEventType.system_event:
+#				print("MIDIEventType.system_event: ", SMF.MIDIEventType.system_event)
 				self._process_track_system_event( channel, event as SMF.MIDIEventSystemEvent )
 			_:
 				# 無視
