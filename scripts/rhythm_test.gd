@@ -22,14 +22,14 @@ onready var note_catchers := {
 #	36: {
 	"left": {
 		"color": Color.yellow,
-		"key": "move_left",
+		"key": "play_left",
 		"node": get_node("Buttons/left_catcher"),
 		"queue": [],
 	},
 #	38: {
 	"right": {
 		"color": Color.green,
-		"key": "move_right",
+		"key": "play_right",
 		"node": get_node("Buttons/right_catcher"),
 		"queue": [],
 	},
