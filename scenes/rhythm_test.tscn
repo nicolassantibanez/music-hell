@@ -1,0 +1,38 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://addons/midi/MidiPlayer.gd" type="Script" id=1]
+[ext_resource path="res://scripts/rhythm_test.gd" type="Script" id=2]
+[ext_resource path="res://audio/music/Melody Town Theme.wav" type="AudioStream" id=3]
+[ext_resource path="res://scenes/note_catcher.tscn" type="PackedScene" id=4]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource( 2 )
+midi_file = "res://audio/music/Melody Town Theme.mid"
+right_catcher_track = "Track 0"
+left_catcher_track = "Track 0"
+testing = true
+seconds_to_print_test = 20
+
+[node name="MidiPlayer" type="Node" parent="."]
+script = ExtResource( 1 )
+file = "res://audio/music/Melody Town Theme.mid"
+loop = true
+load_all_voices_from_soundfont = false
+sequence_per_seconds = 160
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+
+[node name="Buttons" type="Node2D" parent="."]
+
+[node name="left_catcher" parent="Buttons" instance=ExtResource( 4 )]
+modulate = Color( 0.745098, 0.745098, 0.745098, 1 )
+position = Vector2( 320, 160 )
+color = Color( 0.992157, 1, 0, 1 )
+
+[node name="right_catcher" parent="Buttons" instance=ExtResource( 4 )]
+modulate = Color( 0.745098, 0.745098, 0.745098, 1 )
+position = Vector2( 360, 160 )
+color = Color( 0.0627451, 0.72549, 0.168627, 1 )
+
+[node name="Timer" type="Timer" parent="."]
