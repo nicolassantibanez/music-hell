@@ -1,5 +1,8 @@
 extends Node2D
 
+# Signals
+signal note_hit
+
 # Exports
 export (String, FILE, "*.mid") var midi_file:String = ""
 export (int) var offset_midi:int = 5
@@ -61,6 +64,7 @@ func _process(delta):
 				if s.queue.front().test_hit():
 					s.queue.pop_front().hit(s.node.global_position)
 					print("hit")
+					emit_signal("note_hit")
 				else:
 					print("TOO EARLY")
 			else:
