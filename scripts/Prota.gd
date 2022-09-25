@@ -9,6 +9,7 @@ onready var anim_player = $AnimationPlayer
 onready var anim_tree = $AnimationTree
 onready var playback = anim_tree.get("parameters/playback")
 
+const bulletPath = preload("res://scenes/notas/corchea_azul.tscn")
 
 func _ready():
 	anim_tree.active = true
@@ -52,4 +53,29 @@ func _physics_process(delta):
 		
 	if velocity.y > 20:
 		playback.travel("runDown")
+		
+func _process(delta):
+	if Input.is_action_just_pressed("play_left") or Input.is_action_just_pressed("play_right"):
+		shoot()
+	$Node2D.look_at(get_global_mouse_position())
+		
+func shoot():
+	var bullet = bulletPath.instance()
+	get_parent().add_child(bullet)
+	bullet.position = $Node2D/Position2D.global_position
+	bullet.velocity = get_global_mouse_position() - bullet.position
 	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
