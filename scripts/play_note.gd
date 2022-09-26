@@ -48,9 +48,9 @@ func _process(delta):
 		queue_free() # Elimina este nodo
 		return
 	
-	# Velocidad de la nota
-	global_position.y += delta * speed_y
-	
 	if state == "miss":
 		if global_position.y > 600.0:
 			queue_free()
+
+func _physics_process(delta):
+	global_position.y += delta * speed_y

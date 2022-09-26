@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/sailors_battle_theme.mp3-efee81252d1b559299b44370b5a9fd3d.mp3str"
+
+[deps]
+
+source_file="res://audio/music/sailors_battle_theme.mp3"
+dest_files=[ "res://.import/sailors_battle_theme.mp3-efee81252d1b559299b44370b5a9fd3d.mp3str" ]
+
+[params]
+
+loop=true
+loop_offset=0
