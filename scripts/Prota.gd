@@ -8,7 +8,7 @@ onready var pivot = $Pivot
 onready var anim_player = $AnimationPlayer
 onready var anim_tree = $AnimationTree
 onready var playback = anim_tree.get("parameters/playback")
-onready var rhythm_sys = get_node_or_null("/root/Level01/RhythmSystem")
+onready var rhythm_sys = $"../RhythmSystem"   #get_node_or_null("/root/Level01/RhythmSystem")
 
 const bulletPath = preload("res://scenes/notas/corchea_azul.tscn")
 
