@@ -70,7 +70,8 @@ func shoot():
 	get_parent().add_child(bullet)
 	bullet.position = $Node2D/Position2D.global_position
 	bullet.velocity = get_global_mouse_position() - bullet.position
-	
+
+# Puede haber un debuf cuando un contador llegue a cierto punto
 func _on_rhythm_system_note_hit():
 	if rhythm_sys != null:
 		shoot()
