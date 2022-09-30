@@ -19,6 +19,7 @@ var delta_sum = 0.0
 var played_notes:Dictionary = {}
 
 onready var timer:Timer = get_node("Timer")
+onready var offset_timer:Timer = get_node("OffsetTimer")
 onready var music = get_node("AudioStreamPlayer")
 onready var midi = get_node("MidiPlayer")
 
@@ -41,6 +42,11 @@ onready var note_catchers := {
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	# Conectamos el timer para empezar la cancion en el instante correcto
+	offset_timer.set_wait_time(offset_midi)
+	offset_timer.connect("timeout", self, "_on_offset_timer_timeout")
+	offset_timer.start()
+	
 	for catcher in note_catchers.values():
 		catcher.node.connect("body_entered", self, "_on_catcher_body_entered")
 		catcher.node.connect("body_exited", self, "_on_catcher_body_exited")
@@ -85,10 +91,10 @@ func _process(delta):
 	
 	if not midi.playing:
 		midi.play()
-	if delta_sum >= offset_midi and not music.playing:
-		print("Playing midi!")
-		music.play()
-#		midi.play()
+#	if delta_sum >= offset_midi and not music.playing:
+#		print("Playing midi!")
+#		music.play()
+##		midi.play()
 
 func _on_midi_event(channel, event):
 	# Si estamos en "testing", iremos agregando las notas y tracks que
@@ -129,6 +135,10 @@ func _on_timer_timeout():
 		print(track+":")
 		for note in played_notes[track].keys():
 			print("  -> Nota ", note, " : ", played_notes[track][note])
+
+func _on_offset_timer_timeout():
+	print("Music Starting!")
+	music.play()
 	
 func _on_catcher_body_entered(body:Node):
 	body.entered_catcher = true

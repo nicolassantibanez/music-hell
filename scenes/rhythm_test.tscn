@@ -38,3 +38,7 @@ position = Vector2( 360, 160 )
 color = Color( 0.0627451, 0.72549, 0.168627, 1 )
 
 [node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="OffsetTimer" type="Timer" parent="."]
+one_shot = true
