@@ -8,11 +8,17 @@ onready var pivot = $Pivot
 onready var anim_player = $AnimationPlayer
 onready var anim_tree = $AnimationTree
 onready var playback = anim_tree.get("parameters/playback")
+onready var rhythm_sys = get_node_or_null("/root/Level01/RhythmSystem")
 
 const bulletPath = preload("res://scenes/notas/corchea_azul.tscn")
 
 func _ready():
 	anim_tree.active = true
+	if rhythm_sys != null:
+		rhythm_sys.connect("note_hit", self, "_on_rhythm_system_note_hit")
+		print("(debug) Rhythm System is connected!")
+	else:
+		print("(debug warning) Rhythm System is null")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -55,16 +61,20 @@ func _physics_process(delta):
 		playback.travel("runDown")
 		
 func _process(delta):
-	if Input.is_action_just_pressed("play_left") or Input.is_action_just_pressed("play_right"):
-		shoot()
+#	if Input.is_action_just_pressed("play_left") or Input.is_action_just_pressed("play_right"):
+#		shoot()
 	$Node2D.look_at(get_global_mouse_position())
-		
+
 func shoot():
 	var bullet = bulletPath.instance()
 	get_parent().add_child(bullet)
 	bullet.position = $Node2D/Position2D.global_position
 	bullet.velocity = get_global_mouse_position() - bullet.position
-	
+
+# Puede haber un debuf cuando un contador llegue a cierto punto
+func _on_rhythm_system_note_hit():
+	if rhythm_sys != null:
+		shoot()
 
 
 

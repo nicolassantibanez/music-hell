@@ -5,9 +5,11 @@
 [ext_resource path="res://audio/music/Melody Town Theme.wav" type="AudioStream" id=3]
 [ext_resource path="res://scenes/note_catcher.tscn" type="PackedScene" id=4]
 
-[node name="Node2D" type="Node2D"]
+[node name="RhythmSystem" type="Node2D"]
 script = ExtResource( 2 )
 midi_file = "res://audio/music/Melody Town Theme.mid"
+music_file = "res://audio/music/Melody Town Theme.wav"
+offset_midi = 4
 right_catcher_track = "Track 0"
 left_catcher_track = "Track 0"
 testing = true

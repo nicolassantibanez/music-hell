@@ -1,13 +1,17 @@
 extends Node2D
 
+# Signals
+signal note_hit
+
 # Exports
 export (String, FILE, "*.mid") var midi_file:String = ""
+export (String, FILE, "*.mp3, *.wav, *.ogg") var music_file:String = ""
 export (int) var offset_midi:int = 5
 export (String) var right_catcher_track:String = ""
 export (PoolIntArray) var right_catcher_notes:PoolIntArray
 export (String) var left_catcher_track:String = ""
 export (PoolIntArray) var left_catcher_notes:PoolIntArray
-export (int) var notes_spawn_height:int = -400
+export (int) var notes_spawn_height:int = -200
 export (bool) var testing:bool = false
 export (int) var seconds_to_print_test = 10
 
@@ -48,6 +52,10 @@ func _ready():
 		
 	midi.set_file(midi_file)	# Se agrega el path del archivo .mid al midi player
 	midi.connect("midi_event", self, "_on_midi_event")
+	
+	if File.new().file_exists(music_file):
+		var sfx = load(music_file) 
+		music.stream = sfx
 
 
 
@@ -61,6 +69,7 @@ func _process(delta):
 				if s.queue.front().test_hit():
 					s.queue.pop_front().hit(s.node.global_position)
 					print("hit")
+					emit_signal("note_hit")
 				else:
 					print("TOO EARLY")
 			else:
@@ -76,7 +85,7 @@ func _process(delta):
 	
 	if not midi.playing:
 		midi.play()
-	if delta_sum >= 1.25 and not music.playing:
+	if delta_sum >= offset_midi and not music.playing:
 		print("Playing midi!")
 		music.play()
 #		midi.play()
@@ -90,31 +99,21 @@ func _on_midi_event(channel, event):
 
 	if channel.track_name == left_catcher_track and event.type == 144:
 		var nota = event.note;
-		var catcher = note_catchers.get("left")
-		_spawn_note_over_catcher(catcher)
-	if channel.track_name == right_catcher_track and event.type == 128:
+		if nota in left_catcher_notes or left_catcher_notes.empty():
+			var catcher = note_catchers.get("left")
+			_spawn_note_over_catcher(catcher)
+	if channel.track_name == right_catcher_track and event.type == 144:
 		var nota = event.note;
-		var catcher = note_catchers.get("right")
-		_spawn_note_over_catcher(catcher)
-#		var s = note_catchers.get(nota)
-		
-#		if s and event.type == 1:
-#		if s:
-#			var i = preload("res://scenes/play_note.tscn").instance()
-#			add_child(i)
-#			i.expected_time     = delta_sum + 1.25
-#			i.global_rotation   = s.node.global_rotation
-#			i.global_position.y = -400
-#			i.global_position.x = s.node.global_position.x
-#			i.color             = s.color
-#			s.queue.push_back(i)
-#		print("Nota: ", nota)
+		if nota in right_catcher_notes or right_catcher_notes.empty():
+			var catcher = note_catchers.get("right")
+			_spawn_note_over_catcher(catcher)
 
 func _spawn_note_over_catcher(catcher):
 	if catcher:
 		var play_note = preload("res://scenes/play_note.tscn").instance()
 		add_child(play_note)
 		play_note.expected_time     = delta_sum + 1.25
+		play_note.speed_y = (catcher.node.global_position.y - notes_spawn_height) / offset_midi
 		play_note.global_rotation   = catcher.node.global_rotation # Ver que hacer con esto, capaz no nos sirva
 		play_note.global_position.y = notes_spawn_height;
 		play_note.global_position.x = catcher.node.global_position.x
