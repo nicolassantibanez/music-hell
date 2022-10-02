@@ -6,11 +6,11 @@ onready var rotater = $Rotater
 
 var rng = RandomNumberGenerator.new()
 
-var rotate_speed = 0
-var periodo = 1
-var spawn_points = 150
-export var radius = 10
-export var umbral = 0.5
+var rotate_speed: float = 0
+var periodo: float = 1
+var spawn_points: int = 150
+export var radius: float = 10
+export var umbral: float = 0.5
 
 func _ready():
 	rng.randomize()

@@ -4,10 +4,10 @@ const bullet_scene = preload("res://scenes/notas/nota_roja_1.tscn")
 onready var shoot_timer = $SpawnTimer
 onready var rotater = $Rotater
 
-export var rotate_speed = 0
-export var periodo = 1
-export var spawn_points = 60
-export var radius = 10
+export var rotate_speed: float = 0
+export var periodo: float = 1
+export var spawn_points: int = 60
+export var radius: float = 10
 
 func _ready():
 	var step = 2 * PI /spawn_points
