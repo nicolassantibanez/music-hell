@@ -1,9 +1,12 @@
 extends Area2D
 
 onready var animation_player = $AnimationPlayer
+onready var sprite = $Sprite
 const SPEED = 100
 var velocity = Vector2(0,0)
 
+func _ready():
+	sprite.modulate = Color(1, 0, 0)
 
 func _process(delta):
 	position += transform.x * SPEED * delta

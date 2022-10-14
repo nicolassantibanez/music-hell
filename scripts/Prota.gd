@@ -76,7 +76,8 @@ func _on_rhythm_system_note_hit():
 	if rhythm_sys != null:
 		shoot()
 
-
+func take_damage():
+	print("Protagonista recibe daño")
 
 
 

@@ -1,10 +1,9 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://assets/Fondo/4 Walls, Floor & Doors.png" type="Texture" id=1]
 [ext_resource path="res://scenes/Prota.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/rhythm_test.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/enemy_1.tscn" type="PackedScene" id=4]
-[ext_resource path="res://scenes/patrones/radial.tscn" type="PackedScene" id=5]
 
 [sub_resource type="ConvexPolygonShape2D" id=1]
 points = PoolVector2Array( 16, 16, 0, 16, 0, 0, 16, 0 )
@@ -125,10 +124,8 @@ current = true
 
 [node name="Enemy1" parent="." instance=ExtResource( 4 )]
 position = Vector2( 258, 96 )
-
-[node name="PatronConcentrico" parent="Enemy1" instance=ExtResource( 5 )]
-periodo = 1.5
-spawn_points = 10
+speed = 0.0
 
 [node name="Enemy2" parent="." instance=ExtResource( 4 )]
 position = Vector2( 80, 52 )
+speed = 0.0
