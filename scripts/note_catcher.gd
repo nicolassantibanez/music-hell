@@ -3,6 +3,7 @@ extends Area2D
 
 export(bool) var pressed setget set_pressed
 export(Color) var color
+export(Texture) var custom_texture:Texture
 
 onready var sprite = get_node("Sprite")
 onready var collision_shape = get_node("CollisionShape2D")
@@ -12,6 +13,8 @@ func set_pressed(value:bool) -> void:
 
 
 func _ready():
+	if custom_texture != null:
+		sprite.texture = load(custom_texture.resource_path)
 	print(collision_shape.shape.extents)
 	pass
 

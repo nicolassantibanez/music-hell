@@ -1,9 +1,10 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/Prota/idle_prota.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Prota.gd" type="Script" id=2]
 [ext_resource path="res://assets/Prota/run_prota.png" type="Texture" id=3]
 [ext_resource path="res://assets/Prota/saxophone.png" type="Texture" id=4]
+[ext_resource path="res://icon.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -476,3 +477,7 @@ current = true
 
 [node name="Position2D" type="Position2D" parent="Node2D"]
 position = Vector2( 6, 0 )
+
+[node name="Sprite" type="Sprite" parent="Node2D/Position2D"]
+scale = Vector2( 0.1, 0.1 )
+texture = ExtResource( 5 )

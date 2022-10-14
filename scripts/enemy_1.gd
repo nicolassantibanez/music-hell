@@ -24,6 +24,7 @@ func _physics_process(delta):
 # Ver las clase del viernes 
 func _on_Area2D_body_entered(body):
 	if body != self:
+		print(body)
 		player = body
 		 
 
