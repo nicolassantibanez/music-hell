@@ -8,6 +8,7 @@ onready var anim_player = $AnimationPlayer
 
 func _ready():
 	var mouse_pos = get_global_mouse_position()
+	sprite.modulate = Color(0, 0, 1)
 
 func _physics_process(delta):
 #	velocity = velocity.move_toward(mouse_pos, delta)
