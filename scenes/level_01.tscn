@@ -121,5 +121,4 @@ position = Vector2( 166, 74 )
 
 [node name="RhythmSystem" parent="CanvasLayer" instance=ExtResource( 3 )]
 unique_name_in_owner = true
-light_mask = 8
 z_index = 2
