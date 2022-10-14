@@ -14,6 +14,8 @@ export (PoolIntArray) var left_catcher_notes:PoolIntArray
 export (int) var notes_spawn_height:int = -200
 export (bool) var testing:bool = false
 export (int) var seconds_to_print_test = 10
+export (Texture) var left_play_note_texture
+export (Texture) var right_play_note_texture
 
 var delta_sum = 0.0
 var played_notes:Dictionary = {}
@@ -29,6 +31,7 @@ onready var note_catchers := {
 		"color": Color.yellow,
 		"key": "play_left",
 		"node": get_node("Buttons/left_catcher"),
+		"play_note_texture": left_play_note_texture,
 		"queue": [],
 	},
 #	38: {
@@ -36,6 +39,7 @@ onready var note_catchers := {
 		"color": Color.green,
 		"key": "play_right",
 		"node": get_node("Buttons/right_catcher"),
+		"play_note_texture": right_play_note_texture,		
 		"queue": [],
 	},
 }
@@ -118,12 +122,14 @@ func _spawn_note_over_catcher(catcher):
 	if catcher:
 		var play_note = preload("res://scenes/play_note.tscn").instance()
 		add_child(play_note)
+		if catcher.play_note_texture != null:
+			play_note.sprite.texture = catcher.play_note_texture
 		play_note.expected_time     = delta_sum + 1.25
 		play_note.speed_y = (catcher.node.global_position.y - notes_spawn_height) / offset_midi
 		play_note.global_rotation   = catcher.node.global_rotation # Ver que hacer con esto, capaz no nos sirva
 		play_note.global_position.y = notes_spawn_height;
 		play_note.global_position.x = catcher.node.global_position.x
-		play_note.color             = catcher.color
+#		play_note.color             = catcher.color
 		catcher.queue.push_back(play_note)
 	else:
 		print("(debug) catcher ", catcher, " doesn't exist!")
