@@ -1,15 +1,8 @@
 extends KinematicBody2D
 
-signal health_updated(health)
-signal killed()
-
 var velocity = Vector2()
 var ACCELERATION = 10000
 var SPEED = 100
-
-export (float) var max_health = 100
-
-onready var health = max_health setget _set_health
 
 onready var pivot = $Pivot
 onready var anim_player = $AnimationPlayer
@@ -83,19 +76,4 @@ func _on_rhythm_system_note_hit():
 		shoot()
 
 func take_damage():
-	print("Protagonista recibe daño")
-
-func damage(amount):
-	_set_health(health-amount)
-
-func kill():
-	pass
-
-func _set_health(value):
-	var prev_health = health
-	health = clamp(value, 0 ,max_health)
-	if health != prev_health:
-		emit_signal("health_updated", health)
-		if health==0:
-			kill()
-			emit_signal("killed")
+	LivesCounter.lives -= 1
