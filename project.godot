@@ -48,6 +48,10 @@ config/name="Music Hell"
 run/main_scene="res://scenes/ui/main_menu.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+LivesCounter="*res://scripts/LivesCounter.gd"
+
 [display]
 
 window/size/width=400

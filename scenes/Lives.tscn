@@ -1,0 +1,61 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/UI/Heart&ManaUi.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Lives.gd" type="Script" id=2]
+
+[node name="Lives" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="Live1" type="Sprite" parent="."]
+position = Vector2( 6, 6 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 21, 13, 10, 9 )
+
+[node name="Live2" type="Sprite" parent="."]
+position = Vector2( 17, 6 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 21, 13, 10, 9 )
+
+[node name="Live3" type="Sprite" parent="."]
+position = Vector2( 28, 6 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 21, 13, 10, 9 )
+
+[node name="Live4" type="Sprite" parent="."]
+position = Vector2( 39, 6 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 21, 13, 10, 9 )
+
+[node name="Live5" type="Sprite" parent="."]
+position = Vector2( 50, 6 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 21, 13, 10, 9 )
+
+[node name="DeathLive2" type="Sprite" parent="."]
+position = Vector2( 17, 6 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 33, 13, 10, 9 )
+
+[node name="DeathLive3" type="Sprite" parent="."]
+position = Vector2( 28, 6 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 33, 13, 10, 9 )
+
+[node name="DeathLive4" type="Sprite" parent="."]
+position = Vector2( 39, 6 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 33, 13, 10, 9 )
+
+[node name="DeathLive5" type="Sprite" parent="."]
+position = Vector2( 50, 6 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 33, 13, 10, 9 )
