@@ -80,13 +80,11 @@ func _on_rhythm_system_note_hit():
 
 func take_damage():
 	if invunerability_timer.is_stopped():
-		player_sprite.modulate = Color(1,1,1,0.5)
 		anim_player.play("damage")
 		anim_player.queue("flash")
 		invunerability_timer.start()
 		LivesCounter.lives -= 1
 		
 func _on_invunerability_timer_tiemout():
-	player_sprite.modulate = Color(1,1,1,1)
 	anim_player.play("rest")
 	
