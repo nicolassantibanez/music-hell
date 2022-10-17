@@ -1,10 +1,9 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://assets/Prota/idle_prota.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Prota.gd" type="Script" id=2]
 [ext_resource path="res://assets/Prota/run_prota.png" type="Texture" id=3]
 [ext_resource path="res://assets/Prota/saxophone.png" type="Texture" id=4]
-[ext_resource path="res://icon.png" type="Texture" id=5]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 4.0
@@ -59,6 +58,64 @@ tracks/3/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ ExtResource( 1 ) ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("Pivot/Sprite:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("Pivot/Sprite:visible")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+
+[sub_resource type="Animation" id=27]
+resource_name = "damage"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=28]
+resource_name = "flash"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Pivot/Sprite:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ true, false, true ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -219,6 +276,9 @@ tracks/3/keys = {
 "update": 1,
 "values": [ ExtResource( 1 ) ]
 }
+
+[sub_resource type="Animation" id=29]
+resource_name = "rest"
 
 [sub_resource type="Animation" id=6]
 resource_name = "run"
@@ -447,20 +507,17 @@ texture = ExtResource( 1 )
 hframes = 2
 vframes = 4
 
-[node name="Saxophone" type="Sprite" parent="Pivot"]
-position = Vector2( 3, 1 )
-rotation = 3.37372
-scale = Vector2( 0.2, -0.2 )
-texture = ExtResource( 4 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
+anims/damage = SubResource( 27 )
+anims/flash = SubResource( 28 )
 anims/idle = SubResource( 3 )
 anims/idleDown = SubResource( 4 )
 anims/idleUp = SubResource( 5 )
+anims/rest = SubResource( 29 )
 anims/run = SubResource( 6 )
 anims/runDown = SubResource( 7 )
 anims/runUp = SubResource( 8 )
@@ -478,6 +535,12 @@ current = true
 [node name="Position2D" type="Position2D" parent="Node2D"]
 position = Vector2( 6, 0 )
 
-[node name="Sprite" type="Sprite" parent="Node2D/Position2D"]
-scale = Vector2( 0.1, 0.1 )
-texture = ExtResource( 5 )
+[node name="Saxophone" type="Sprite" parent="Node2D/Position2D"]
+position = Vector2( -3, 1 )
+rotation = -2.90947
+scale = Vector2( 0.2, -0.2 )
+texture = ExtResource( 4 )
+
+[node name="InvunerabilityTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true

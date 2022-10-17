@@ -9,6 +9,8 @@ onready var anim_player = $AnimationPlayer
 onready var anim_tree = $AnimationTree
 onready var playback = anim_tree.get("parameters/playback")
 onready var rhythm_sys = $"%RhythmSystem"
+onready var invunerability_timer = $InvunerabilityTimer
+onready var player_sprite = $Pivot/Sprite
 
 const bulletPath = preload("res://scenes/notas/corchea_azul.tscn")
 
@@ -19,6 +21,7 @@ func _ready():
 		print("(debug) Rhythm System is connected!")
 	else:
 		print("(debug warning) Rhythm System is null")
+	invunerability_timer.connect("timeout", self, "_on_invunerability_timer_tiemout")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -76,4 +79,14 @@ func _on_rhythm_system_note_hit():
 		shoot()
 
 func take_damage():
-	LivesCounter.lives -= 1
+	if invunerability_timer.is_stopped():
+		player_sprite.modulate = Color(1,1,1,0.5)
+		anim_player.play("damage")
+		anim_player.queue("flash")
+		invunerability_timer.start()
+		LivesCounter.lives -= 1
+		
+func _on_invunerability_timer_tiemout():
+	player_sprite.modulate = Color(1,1,1,1)
+	anim_player.play("rest")
+	

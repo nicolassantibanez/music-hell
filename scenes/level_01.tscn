@@ -125,12 +125,8 @@ collision_mask = 5
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Lives" parent="CanvasLayer" instance=ExtResource( 5 )]
+
 [node name="RhythmSystem" parent="CanvasLayer" instance=ExtResource( 3 )]
 unique_name_in_owner = true
 z_index = 2
-
-[node name="Camera2D" type="Camera2D" parent="."]
-offset = Vector2( 200, 100 )
-current = true
-
-[node name="Lives" parent="." instance=ExtResource( 5 )]

@@ -6,7 +6,8 @@ func _ready():
 	$DeathLive3.hide()
 	$DeathLive4.hide()
 	$DeathLive5.hide()
-	
+
+func _process(delta):
 	if LivesCounter.lives==4:
 		$DeathLive5.show()
 		

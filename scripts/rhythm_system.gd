@@ -149,7 +149,6 @@ func _on_offset_timer_timeout():
 func _on_catcher_body_entered(body:Node):
 	body.entered_catcher = true
 	body.is_in_catcher = true
-	print("El nodo ", body.name, " entró al Left Catcher!")
 
 func _on_catcher_body_exited(body:Node):
 	body.is_in_catcher = false

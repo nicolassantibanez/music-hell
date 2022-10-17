@@ -2,6 +2,8 @@ extends KinematicBody2D
 
 onready var bullet_scene = preload("res://scenes/notas/nota_morada_1.tscn")
 
+export var hp: int = 2
+
 var player = null
 var move = Vector2.ZERO
 export var speed: float = 1
@@ -46,3 +48,6 @@ func _on_Timer_timeout():
 
 func take_damage():
 	print("enemigo recibe daño")
+#	hp -= 1
+#	if hp <= 0:
+#		queue_free()
