@@ -1,10 +1,7 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://assets/Notas/corchea azul/corchea.png" type="Texture" id=1]
 [ext_resource path="res://scripts/corchea_azul.gd" type="Script" id=2]
-
-[sub_resource type="CircleShape2D" id=1]
-radius = 2.0
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -86,14 +83,16 @@ tracks/2/keys = {
 "values": [ 0, 1, 2, 3, 4 ]
 }
 
+[sub_resource type="CircleShape2D" id=1]
+radius = 2.5
+
+[sub_resource type="CircleShape2D" id=4]
+radius = 1.0
+
 [node name="CorcheaAzul" type="KinematicBody2D"]
 collision_layer = 4
 collision_mask = 17
 script = ExtResource( 2 )
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2( 0.8, 0.8 )
-shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.1, 0.1 )
@@ -101,8 +100,18 @@ texture = ExtResource( 1 )
 hframes = 5
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 5.0
+wait_time = 2.0
+one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )
 anims/viaje = SubResource( 3 )
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+scale = Vector2( 0.8, 0.8 )
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 4 )

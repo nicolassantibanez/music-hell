@@ -9,7 +9,6 @@ var look_vec = Vector2.ZERO
 var player = null
 onready var sprite = $Sprite
 
-
 func _ready():
 	look_vec = player.position - global_position
 	animation_player.play("viajeMorado")
@@ -23,6 +22,7 @@ func _physics_process(delta):
 	position += move
 
 func _on_body_entered(body: Node):
-	if body.has_method("take_damage"):
+	if body.has_method("take_damage") and body.name == "Protagonista": # and no enemigo
 		body.take_damage()
+		queue_free()
 

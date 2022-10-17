@@ -8,6 +8,7 @@ var player = null
 var move = Vector2.ZERO
 export var speed: float = 1
 onready var timer = get_node("Timer")
+onready var protagonista = $"%Protagonista"
 
 func _ready():
 	pass
@@ -25,7 +26,7 @@ func _physics_process(delta):
 
 # Ver las clase del viernes 
 func _on_Area2D_body_entered(body):
-	if body != self:
+	if body != self and body == protagonista:
 		print(body)
 		player = body
 		 
@@ -48,6 +49,6 @@ func _on_Timer_timeout():
 
 func take_damage():
 	print("enemigo recibe daño")
-#	hp -= 1
-#	if hp <= 0:
-#		queue_free()
+	hp -= 1
+	if hp <= 0:
+		queue_free()
