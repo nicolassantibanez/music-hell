@@ -7,6 +7,7 @@ var velocity = Vector2(0,0)
 
 func _ready():
 	sprite.modulate = Color(1, 0, 0)
+	connect("body_entered", self, "_on_body_entered")
 
 func _physics_process(delta):
 	position += transform.x * SPEED * delta
@@ -15,4 +16,7 @@ func _physics_process(delta):
 #	animation_plater.play("viajeRoja1")
 	
 func _on_KillerTimer_timeout():
+	queue_free()
+	
+func _on_body_entered(body: Node):
 	queue_free()

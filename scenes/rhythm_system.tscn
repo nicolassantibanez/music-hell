@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://addons/midi/MidiPlayer.gd" type="Script" id=1]
 [ext_resource path="res://scripts/rhythm_system.gd" type="Script" id=2]
@@ -8,6 +8,7 @@
 [ext_resource path="res://assets/rhythm/catcher_verde.png" type="Texture" id=6]
 [ext_resource path="res://assets/rhythm/nota_verde.png" type="Texture" id=7]
 [ext_resource path="res://assets/rhythm/nota_amarilla.png" type="Texture" id=8]
+[ext_resource path="res://audio/sfx/Collect_Point_00.wav" type="AudioStream" id=9]
 
 [node name="RhythmSystem" type="Node2D"]
 script = ExtResource( 2 )
@@ -55,3 +56,6 @@ one_shot = true
 
 [node name="OffsetTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="HitSFX" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 9 )

@@ -24,5 +24,6 @@ func _physics_process(delta):
 func _on_body_entered(body: Node):
 	if body.has_method("take_damage") and body.name == "Protagonista": # and no enemigo
 		body.take_damage()
+	if not body.has_method("take_damage"):
 		queue_free()
 

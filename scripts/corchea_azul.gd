@@ -7,6 +7,7 @@ onready var sprite = $Sprite
 onready var anim_player = $AnimationPlayer
 onready var area = $Area2D
 onready var protagonista = $"%Protagonista"
+
 func _ready():
 	var mouse_pos = get_global_mouse_position()
 	sprite.modulate = Color(0, 0, 1)
@@ -25,7 +26,7 @@ func on_timer_timeot():
 	queue_free()
 	
 func _on_body_entered(body: Node):
-	if body.has_method("take_damage") and body != protagonista:
+	if body.has_method("take_damage") and body.name != "Protagonista":
 		body.take_damage()
 		queue_free()
 	else:

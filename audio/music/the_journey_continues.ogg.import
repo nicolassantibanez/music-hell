@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/the_journey_continues.ogg-5b490e28e5e66ac0237ef1eb17f03b1d.oggstr"
+
+[deps]
+
+source_file="res://audio/music/the_journey_continues.ogg"
+dest_files=[ "res://.import/the_journey_continues.ogg-5b490e28e5e66ac0237ef1eb17f03b1d.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

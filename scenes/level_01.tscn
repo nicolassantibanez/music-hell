@@ -137,3 +137,10 @@ spawn_points = 20
 [node name="RhythmSystem" parent="CanvasLayer" instance=ExtResource( 3 )]
 unique_name_in_owner = true
 z_index = 2
+midi_file = "res://audio/music/the_journey_continues.mid"
+music_file = "res://audio/music/the_journey_continues.ogg"
+offset_midi = 5
+right_catcher_notes = PoolIntArray( 72, 71, 60, 67, 59 )
+left_catcher_notes = PoolIntArray( 64, 69, 65, 68 )
+left_many_notes_filter = 2
+right_many_notes_filter = 2

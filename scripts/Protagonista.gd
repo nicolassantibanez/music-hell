@@ -11,6 +11,7 @@ onready var playback = anim_tree.get("parameters/playback")
 onready var rhythm_sys = $"%RhythmSystem"
 onready var invunerability_timer = $InvunerabilityTimer
 onready var player_sprite = $Pivot/Sprite
+onready var take_damage_sfx = $TakeDamageSFX
 
 const bulletPath = preload("res://scenes/notas/corchea_azul.tscn")
 
@@ -80,6 +81,7 @@ func _on_rhythm_system_note_hit():
 
 func take_damage():
 	if invunerability_timer.is_stopped():
+		take_damage_sfx.play()
 		anim_player.play("damage")
 		anim_player.queue("flash")
 		invunerability_timer.start()
