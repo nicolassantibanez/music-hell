@@ -3,6 +3,7 @@ extends KinematicBody2D
 onready var bullet_scene = preload("res://scenes/notas/nota_morada_1.tscn")
 
 export var hp: int = 2
+export (bool) var fire_activated = true
 
 var player = null
 var move = Vector2.ZERO
@@ -44,7 +45,7 @@ func _fire():
 	timer.set_wait_time(1)
 	
 func _on_Timer_timeout():
-	if player != null:
+	if player != null and fire_activated:
 		_fire()
 
 func take_damage():
