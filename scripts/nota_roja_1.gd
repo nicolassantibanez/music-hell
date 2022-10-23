@@ -19,4 +19,8 @@ func _on_KillerTimer_timeout():
 	queue_free()
 	
 func _on_body_entered(body: Node):
-	queue_free()
+	if body.has_method("take_damage") and body.name == "Protagonista": # and no enemigo
+		body.take_damage()
+	if not body.has_method("take_damage"):
+		queue_free()
+
