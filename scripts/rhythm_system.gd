@@ -14,16 +14,21 @@ export (PoolIntArray) var left_catcher_notes:PoolIntArray
 export (int) var notes_spawn_height:int = -200
 export (bool) var testing:bool = false
 export (int) var seconds_to_print_test = 10
+export (int) var left_many_notes_filter = 1
+export (int) var right_many_notes_filter = 1
 export (Texture) var left_play_note_texture
 export (Texture) var right_play_note_texture
 
 var delta_sum = 0.0
 var played_notes:Dictionary = {}
+var left_many_notes_counter = 0
+var right_many_notes_counter = 0
 
 onready var timer:Timer = get_node("Timer")
 onready var offset_timer:Timer = get_node("OffsetTimer")
 onready var music = get_node("AudioStreamPlayer")
 onready var midi = get_node("MidiPlayer")
+onready var hit_sfx = $HitSFX
 
 onready var note_catchers := {
 #	36: {
@@ -78,6 +83,7 @@ func _process(delta):
 #				if s.queue.front().test_hit(delta_sum):
 				if s.queue.front().test_hit():
 					s.queue.pop_front().hit(s.node.global_position)
+					hit_sfx.play()
 					print("hit")
 					emit_signal("note_hit")
 				else:
@@ -109,11 +115,20 @@ func _on_midi_event(channel, event):
 
 	if channel.track_name == left_catcher_track and event.type == 144:
 		var nota = event.note;
+		if left_many_notes_counter != 0:
+			left_many_notes_counter = (left_many_notes_counter+1) % left_many_notes_filter
+			return
+		left_many_notes_counter = (left_many_notes_counter+1) % left_many_notes_filter
+			
 		if nota in left_catcher_notes or left_catcher_notes.empty():
 			var catcher = note_catchers.get("left")
 			_spawn_note_over_catcher(catcher)
 	if channel.track_name == right_catcher_track and event.type == 144:
 		var nota = event.note;
+		if right_many_notes_counter != 0:
+			right_many_notes_counter = (right_many_notes_counter+1) % right_many_notes_filter
+			return
+		right_many_notes_counter = (right_many_notes_counter+1) % right_many_notes_filter
 		if nota in right_catcher_notes or right_catcher_notes.empty():
 			var catcher = note_catchers.get("right")
 			_spawn_note_over_catcher(catcher)
