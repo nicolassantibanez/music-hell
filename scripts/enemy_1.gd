@@ -4,6 +4,7 @@ onready var bullet_scene = preload("res://scenes/notas/nota_morada_1.tscn")
 
 export var hp: int = 2
 export (bool) var fire_activated = true
+export (float) var stop_distance = 50.0
 
 var player = null
 var move = Vector2.ZERO
@@ -16,7 +17,8 @@ func _ready():
 
 func _physics_process(delta):
 	move = Vector2.ZERO
-	if is_instance_valid(player):
+	if is_instance_valid(player) and (position - player.position).length() > stop_distance:
+		print("Distancia: ", (position - player.position).length())		
 		move = position.direction_to(player.position) * speed
 	else:
 		move = Vector2.ZERO
