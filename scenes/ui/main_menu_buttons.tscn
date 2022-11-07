@@ -23,6 +23,7 @@ margin_right = 375.0
 margin_bottom = 154.0
 size_flags_horizontal = 5
 size_flags_vertical = 4
+theme = ExtResource( 2 )
 
 [node name="Label" type="Label" parent="VBoxContainer"]
 margin_right = 350.0
