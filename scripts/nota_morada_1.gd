@@ -2,12 +2,13 @@ extends Area2D
 
 # Esta nota sigue al jugador
 
-onready var animation_player = $AnimationPlayer
 const SPEED = 2
 var move = Vector2.ZERO
 var look_vec = Vector2.ZERO
 var player = null
+var _damage = 1
 onready var sprite = $Sprite
+onready var animation_player = $AnimationPlayer
 
 func _ready():
 	look_vec = player.position - global_position
@@ -23,7 +24,7 @@ func _physics_process(delta):
 
 func _on_body_entered(body: Node):
 	if body.has_method("take_damage") and body.name == "Protagonista": # and no enemigo
-		body.take_damage()
+		body.take_damage(self._damage)
 	if not body.has_method("take_damage"):
 		queue_free()
 

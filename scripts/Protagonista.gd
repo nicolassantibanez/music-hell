@@ -76,24 +76,32 @@ func _physics_process(delta):
 
 
 
-func shoot():
+func shoot(combo):
+	# TODO: Crear ecuacion para agregar el multiplicador por combo
 	var bullet = bulletPath.instance()
 	get_parent().add_child(bullet)
 	bullet.position = $Node2D/Position2D.global_position
+	var damage_value:float = 1
+	if combo < 5 * 3:
+		damage_value = floor(combo / 5)
+	else:
+		damage_value = floor(5 * 3 / 5)
+	print("Bullet with damage: ", damage_value)
+	bullet.set_damage(damage_value)
 	bullet.velocity = get_global_mouse_position() - bullet.position
 
 # Puede haber un debuf cuando un contador llegue a cierto punto
-func _on_rhythm_system_note_hit():
+func _on_rhythm_system_note_hit(combo:int):
 	if rhythm_sys != null:
-		shoot()
+		shoot(combo)
 
-func take_damage():
+func take_damage(dmg_to_take:int):
 	if invunerability_timer.is_stopped():
 		take_damage_sfx.play()
 		anim_player.play("damage")
 		anim_player.queue("flash")
 		invunerability_timer.start()
-		LivesCounter.lives -= 1
+		LivesCounter.lives -= dmg_to_take
 		
 func _on_invunerability_timer_tiemout():
 	anim_player.play("rest")

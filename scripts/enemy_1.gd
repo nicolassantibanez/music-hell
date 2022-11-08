@@ -46,8 +46,8 @@ func _on_Timer_timeout():
 	if player != null and fire_activated:
 		_fire()
 
-func take_damage():
-	print("enemigo recibe daño")
-	hp -= 1
+func take_damage(dmg_to_take:int):
+	print("enemigo recibe daño: ", dmg_to_take)
+	hp -= dmg_to_take
 	if hp <= 0:
 		queue_free()

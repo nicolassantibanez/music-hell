@@ -1,7 +1,7 @@
 extends Node2D
 
 # Signals
-signal note_hit
+signal note_hit(combo)
 
 # Exports
 export (String, FILE, "*.mid") var midi_file:String = ""
@@ -23,6 +23,8 @@ var delta_sum = 0.0
 var played_notes:Dictionary = {}
 var left_many_notes_counter = 0
 var right_many_notes_counter = 0
+var combo_count = 0
+var miss_count = 0
 
 onready var timer:Timer = get_node("Timer")
 onready var offset_timer:Timer = get_node("OffsetTimer")
@@ -44,7 +46,7 @@ onready var note_catchers := {
 		"color": Color.green,
 		"key": "play_right",
 		"node": get_node("Buttons/right_catcher"),
-		"play_note_texture": right_play_note_texture,		
+		"play_note_texture": right_play_note_texture,
 		"queue": [],
 	},
 }
@@ -82,19 +84,24 @@ func _process(delta):
 			if not s.queue.empty():
 #				if s.queue.front().test_hit(delta_sum):
 				if s.queue.front().test_hit():
+					combo_count += 1
+					miss_count = 0
 					s.queue.pop_front().hit(s.node.global_position)
 					hit_sfx.play()
-					print("hit")
-					emit_signal("note_hit")
+					print("hit, combo=", combo_count)
+					emit_signal("note_hit", combo_count)
 				else:
+					combo_count = 0
+					miss_count += 1
 					print("TOO EARLY")
 			else:
 				print("WUT??")
 				
 		if not s.queue.empty():
 			if s.queue.front().test_miss():
+#				combo_count = 0
 				s.queue.pop_front().miss()
-				print("miss")
+#				print("miss")
 
 	for s in note_catchers.values():
 		s.node.pressed = Input.is_action_pressed(s.key)
