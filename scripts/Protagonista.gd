@@ -38,7 +38,12 @@ func _physics_process(delta):
 		Input.get_axis("move_left", "move_right"),
 		Input.get_axis("move_up","move_down")
 	)
-
+	# Focus Mode
+	if Input.is_action_pressed("focus"):
+		SPEED = 50
+	if Input.is_action_just_released("focus"):
+		SPEED = 100
+		
 	velocity = velocity.move_toward(move_input * SPEED, ACCELERATION * delta)
 	
 	# Animacion
