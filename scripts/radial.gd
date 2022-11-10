@@ -33,6 +33,7 @@ func _process(delta):
 func _on_SpawnTimer_timeout():
 	for s in rotater.get_children():
 		var bullet = bullet_scene.instance()
-		get_tree().root.add_child(bullet)
+#		get_tree().root.add_child(bullet)
+		get_parent().get_parent().add_child(bullet)
 		bullet.position = s.global_position
 		bullet.rotation = s.global_rotation

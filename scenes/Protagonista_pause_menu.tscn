@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/Prota/idle_prota.png" type="Texture" id=1]
 [ext_resource path="res://scripts/Protagonista.gd" type="Script" id=2]
@@ -8,9 +8,10 @@
 [ext_resource path="res://scenes/Lives.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/rhythm_system.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/ui/pause_menu.tscn" type="PackedScene" id=8]
+[ext_resource path="res://assets/rhythm/catcher_amarillo.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 4.0
+radius = 3.0
 height = 0.0
 
 [sub_resource type="Animation" id=2]
@@ -598,6 +599,11 @@ vframes = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="CollisionShape2D"]
+modulate = Color( 1, 1, 1, 0.396078 )
+scale = Vector2( 0.22, 0.22 )
+texture = ExtResource( 9 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 2 )

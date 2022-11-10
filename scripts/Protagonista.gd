@@ -12,10 +12,12 @@ onready var rhythm_sys = $"%RhythmSystem"
 onready var invunerability_timer = $InvunerabilityTimer
 onready var player_sprite = $Pivot/Sprite
 onready var take_damage_sfx = $TakeDamageSFX
+onready var collision_sprite = $CollisionShape2D/Sprite
 
 const bulletPath = preload("res://scenes/notas/corchea_azul.tscn")
 
 func _ready():
+	collision_sprite.hide()
 	anim_tree.active = true
 	if rhythm_sys != null:
 		rhythm_sys.connect("note_hit", self, "_on_rhythm_system_note_hit")
@@ -40,8 +42,10 @@ func _physics_process(delta):
 	)
 	if Input.is_action_pressed("focus"):
 		SPEED = 50
+		collision_sprite.show()
 	if Input.is_action_just_released("focus"):
 		SPEED = 100
+		collision_sprite.hide()
 		
 	velocity = velocity.move_toward(move_input * SPEED, ACCELERATION * delta)
 	
