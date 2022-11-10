@@ -26,15 +26,15 @@ func _physics_process(delta):
 
 
 # Ver las clase del viernes 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(body:Node):
 	if body != self and body == protagonista:
-		print(body)
 		player = body
 		 
 
 
 func _on_Area2D_body_exited(body):
-	player = null
+	if body != self and body == protagonista:
+		player = null
 
 
 func _fire():
