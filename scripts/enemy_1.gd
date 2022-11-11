@@ -18,8 +18,6 @@ func _physics_process(delta):
 	move = Vector2.ZERO
 	if is_instance_valid(player):
 		move = position.direction_to(player.position) * speed
-	else:
-		move = Vector2.ZERO
 		
 	move = move.normalized()
 	move = move_and_collide(move)
