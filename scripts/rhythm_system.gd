@@ -2,6 +2,10 @@ extends Node2D
 
 # Signals
 signal note_hit(combo)
+signal too_many_misses()
+
+const MISSES_TO_DEBUF = 5
+const MAX_COMBO = 10
 
 # Exports
 export (String, FILE, "*.mid") var midi_file:String = ""
@@ -23,7 +27,7 @@ var delta_sum = 0.0
 var played_notes:Dictionary = {}
 var left_many_notes_counter = 0
 var right_many_notes_counter = 0
-var combo_count = 0
+var combo_count = 0 setget set_combo_count
 var miss_count = 0
 
 onready var timer:Timer = get_node("Timer")
@@ -31,6 +35,8 @@ onready var offset_timer:Timer = get_node("OffsetTimer")
 onready var music = get_node("AudioStreamPlayer")
 onready var midi = get_node("MidiPlayer")
 onready var hit_sfx = $HitSFX
+onready var hit_particles = $CPUParticles2D
+
 
 onready var note_catchers := {
 #	36: {
@@ -50,6 +56,14 @@ onready var note_catchers := {
 		"queue": [],
 	},
 }
+
+func set_combo_count(value:int):
+	if value < 0:
+		combo_count = 0
+	elif value > MAX_COMBO:
+		combo_count = MAX_COMBO
+	else:
+		combo_count = value
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -84,22 +98,27 @@ func _process(delta):
 			if not s.queue.empty():
 #				if s.queue.front().test_hit(delta_sum):
 				if s.queue.front().test_hit():
-					combo_count += 1
+					set_combo_count(combo_count + 1)
 					miss_count = 0
 					s.queue.pop_front().hit(s.node.global_position)
 					hit_sfx.play()
+					hit_particles.color = s.color
+					hit_particles.position = s.node.position
+					hit_particles.emitting = true
 					print("hit, combo=", combo_count)
 					emit_signal("note_hit", combo_count)
 				else:
-					combo_count = 0
+					set_combo_count(0)
 					miss_count += 1
+					if miss_count >= MISSES_TO_DEBUF:
+						emit_signal("too_many_misses")
 					print("TOO EARLY")
 			else:
 				print("WUT??")
 				
 		if not s.queue.empty():
 			if s.queue.front().test_miss():
-#				combo_count = 0
+				set_combo_count(combo_count - 1)
 				s.queue.pop_front().miss()
 #				print("miss")
 
