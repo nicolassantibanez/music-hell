@@ -6,6 +6,7 @@ signal too_many_misses()
 
 const MISSES_TO_DEBUF = 5
 const MAX_COMBO = 10
+const HIT_PARTICLES_PATH = preload("res://scenes/note_hit_particles.tscn")
 
 # Exports
 export (String, FILE, "*.mid") var midi_file:String = ""
@@ -35,7 +36,6 @@ onready var offset_timer:Timer = get_node("OffsetTimer")
 onready var music = get_node("AudioStreamPlayer")
 onready var midi = get_node("MidiPlayer")
 onready var hit_sfx = $HitSFX
-onready var hit_particles = $CPUParticles2D
 
 
 onready var note_catchers := {
@@ -101,10 +101,7 @@ func _process(delta):
 					set_combo_count(combo_count + 1)
 					miss_count = 0
 					s.queue.pop_front().hit(s.node.global_position)
-					hit_sfx.play()
-					hit_particles.color = s.color
-					hit_particles.position = s.node.position
-					hit_particles.emitting = true
+					_note_hit_feedback(s)
 					print("hit, combo=", combo_count)
 					emit_signal("note_hit", combo_count)
 				else:
@@ -205,3 +202,13 @@ func _add_to_played_notes(track:String, note:int):
 	else:
 		played_notes[track] = {note: 1}
 
+func _note_hit_feedback(catcher):
+	# SFX feedback
+	hit_sfx.play()
+	# Visual feedback
+	var hit_particles = HIT_PARTICLES_PATH.instance()
+	get_parent().add_child(hit_particles)
+	hit_particles.color = catcher.color
+	hit_particles.position = catcher.node.position
+	hit_particles.emitting = true
+	

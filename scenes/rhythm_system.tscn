@@ -58,19 +58,3 @@ one_shot = true
 
 [node name="HitSFX" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 9 )
-
-[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
-emitting = false
-amount = 20
-one_shot = true
-explosiveness = 1.0
-spread = 180.0
-gravity = Vector2( 0, 0 )
-initial_velocity = 30.0
-damping = 30.51
-damping_random = 0.5
-scale_amount = 1.5
-scale_amount_random = 1.0
-color = Color( 0.215686, 0.729412, 0.262745, 1 )
-hue_variation = 1.0
-hue_variation_random = 0.2
