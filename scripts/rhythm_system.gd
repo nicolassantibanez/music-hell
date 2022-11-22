@@ -1,7 +1,12 @@
 extends Node2D
 
 # Signals
-signal note_hit
+signal note_hit(combo)
+signal too_many_misses()
+
+const MISSES_TO_DEBUF = 5
+const MAX_COMBO = 10
+const HIT_PARTICLES_PATH = preload("res://scenes/note_hit_particles.tscn")
 
 # Exports
 export (String, FILE, "*.mid") var midi_file:String = ""
@@ -23,12 +28,15 @@ var delta_sum = 0.0
 var played_notes:Dictionary = {}
 var left_many_notes_counter = 0
 var right_many_notes_counter = 0
+var combo_count = 0 setget set_combo_count
+var miss_count = 0
 
 onready var timer:Timer = get_node("Timer")
 onready var offset_timer:Timer = get_node("OffsetTimer")
 onready var music = get_node("AudioStreamPlayer")
 onready var midi = get_node("MidiPlayer")
 onready var hit_sfx = $HitSFX
+
 
 onready var note_catchers := {
 #	36: {
@@ -44,10 +52,18 @@ onready var note_catchers := {
 		"color": Color.green,
 		"key": "play_right",
 		"node": get_node("Buttons/right_catcher"),
-		"play_note_texture": right_play_note_texture,		
+		"play_note_texture": right_play_note_texture,
 		"queue": [],
 	},
 }
+
+func set_combo_count(value:int):
+	if value < 0:
+		combo_count = 0
+	elif value > MAX_COMBO:
+		combo_count = MAX_COMBO
+	else:
+		combo_count = value
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -82,19 +98,26 @@ func _process(delta):
 			if not s.queue.empty():
 #				if s.queue.front().test_hit(delta_sum):
 				if s.queue.front().test_hit():
+					set_combo_count(combo_count + 1)
+					miss_count = 0
 					s.queue.pop_front().hit(s.node.global_position)
-					hit_sfx.play()
-					print("hit")
-					emit_signal("note_hit")
+					_note_hit_feedback(s)
+					print("hit, combo=", combo_count)
+					emit_signal("note_hit", combo_count)
 				else:
+					set_combo_count(0)
+					miss_count += 1
+					if miss_count >= MISSES_TO_DEBUF:
+						emit_signal("too_many_misses")
 					print("TOO EARLY")
 			else:
 				print("WUT??")
 				
 		if not s.queue.empty():
 			if s.queue.front().test_miss():
+				set_combo_count(combo_count - 1)
 				s.queue.pop_front().miss()
-				print("miss")
+#				print("miss")
 
 	for s in note_catchers.values():
 		s.node.pressed = Input.is_action_pressed(s.key)
@@ -179,3 +202,13 @@ func _add_to_played_notes(track:String, note:int):
 	else:
 		played_notes[track] = {note: 1}
 
+func _note_hit_feedback(catcher):
+	# SFX feedback
+	hit_sfx.play()
+	# Visual feedback
+	var hit_particles = HIT_PARTICLES_PATH.instance()
+	get_parent().add_child(hit_particles)
+	hit_particles.color = catcher.color
+	hit_particles.position = catcher.node.position
+	hit_particles.emitting = true
+	

@@ -4,6 +4,7 @@ onready var animation_player = $AnimationPlayer
 onready var sprite = $Sprite
 const SPEED = 100
 var velocity = Vector2(0,0)
+var _damage = 1
 
 func _ready():
 	sprite.modulate = Color(1, 0, 0)
@@ -20,7 +21,7 @@ func _on_KillerTimer_timeout():
 	
 func _on_body_entered(body: Node):
 	if body.has_method("take_damage") and body.name == "Protagonista": # and no enemigo
-		body.take_damage()
+		body.take_damage(self._damage)
 	if not body.has_method("take_damage"):
 		queue_free()
 
