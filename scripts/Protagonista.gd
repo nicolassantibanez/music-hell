@@ -21,6 +21,7 @@ onready var combo_container = $CanvasLayer/ComboContainer
 const bulletPath = preload("res://scenes/notas/corchea_azul.tscn")
 
 func _ready():
+	combo_container.set_enable_fills(1)
 	collision_sprite.hide()
 	anim_tree.active = true
 	if rhythm_sys != null:
