@@ -36,6 +36,7 @@ onready var offset_timer:Timer = get_node("OffsetTimer")
 onready var music = get_node("AudioStreamPlayer")
 onready var midi = get_node("MidiPlayer")
 onready var hit_sfx = $HitSFX
+onready var miss_sfx = $MissSFX
 
 
 onready var note_catchers := {
@@ -107,6 +108,7 @@ func _process(delta):
 				else:
 					set_combo_count(0)
 					miss_count += 1
+					_note_miss_feedback()
 					if miss_count >= MISSES_TO_DEBUF:
 						emit_signal("too_many_misses")
 					print("TOO EARLY")
@@ -211,4 +213,7 @@ func _note_hit_feedback(catcher):
 	hit_particles.color = catcher.color
 	hit_particles.position = catcher.node.position
 	hit_particles.emitting = true
-	
+
+func _note_miss_feedback():
+	# SFX feedback
+	miss_sfx.play()
