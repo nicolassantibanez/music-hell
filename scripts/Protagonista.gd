@@ -4,6 +4,7 @@ var velocity = Vector2()
 var ACCELERATION = 10000
 var SPEED = 100
 var debuff_factor = 1
+var curr_damage = 1
 
 onready var pivot = $Pivot
 onready var anim_player = $AnimationPlayer
@@ -15,6 +16,7 @@ onready var debuff_timer = $DebuffTimer
 onready var player_sprite = $Pivot/Sprite
 onready var take_damage_sfx = $TakeDamageSFX
 onready var collision_sprite = $CollisionShape2D/Sprite
+onready var combo_container = $CanvasLayer/ComboContainer
 
 const bulletPath = preload("res://scenes/notas/corchea_azul.tscn")
 
@@ -24,6 +26,7 @@ func _ready():
 	if rhythm_sys != null:
 		rhythm_sys.connect("note_hit", self, "_on_rhythm_system_note_hit")
 		rhythm_sys.connect("too_many_misses", self, "_on_rhythm_system_too_many_misses")
+		rhythm_sys.connect("note_missed", self, "_on_rhythm_system_note_missed")
 		print("(debug) Rhythm System is connected!")
 	else:
 		print("(debug warning) Rhythm System is null")
@@ -79,23 +82,28 @@ func _physics_process(delta):
 
 	$Node2D.look_at(get_global_mouse_position())
 
+func _set_damage_by_combo(combo: int):
+	curr_damage = floor(combo / (rhythm_sys.MAX_COMBO / 2)) + 1
+	# Combo Container UI
+	combo_container.set_enable_fills(curr_damage)
 
-
-func shoot(combo):
+func shoot():
 	# TODO: Crear ecuacion para agregar el multiplicador por combo
 	var bullet = bulletPath.instance()
 	get_parent().add_child(bullet)
 	bullet.position = $Node2D/Position2D.global_position
-	var damage_value:float = 1
-	damage_value = floor(combo / (rhythm_sys.MAX_COMBO / 2)) + 1
-	print("Bullet with damage: ", damage_value)
-	bullet.set_damage(damage_value)
+	bullet.set_damage(curr_damage)
 	bullet.velocity = get_global_mouse_position() - bullet.position
 
 # Puede haber un debuf cuando un contador llegue a cierto punto
 func _on_rhythm_system_note_hit(combo:int):
 	if rhythm_sys != null:
-		shoot(combo)
+		_set_damage_by_combo(combo)
+		shoot()
+
+func _on_rhythm_system_note_missed(combo: int, miss_count:int):
+	if rhythm_sys != null:
+		_set_damage_by_combo(combo)
 
 func _on_rhythm_system_too_many_misses():
 	print("Too many misses!")

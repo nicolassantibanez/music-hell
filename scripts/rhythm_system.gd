@@ -2,6 +2,7 @@ extends Node2D
 
 # Signals
 signal note_hit(combo)
+signal note_missed(combo)
 signal too_many_misses()
 
 const MISSES_TO_DEBUF = 5
@@ -112,6 +113,7 @@ func _process(delta):
 					if miss_count >= MISSES_TO_DEBUF:
 						emit_signal("too_many_misses")
 					print("TOO EARLY")
+					emit_signal("note_missed", combo_count, miss_count)
 			else:
 				print("WUT??")
 				
@@ -119,6 +121,7 @@ func _process(delta):
 			if s.queue.front().test_miss():
 				set_combo_count(combo_count - 1)
 				s.queue.pop_front().miss()
+				emit_signal("note_missed", combo_count, miss_count)
 #				print("miss")
 
 	for s in note_catchers.values():

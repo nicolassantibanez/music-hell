@@ -1,0 +1,46 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/UI/cryos_mini_gui.png" type="Texture" id=1]
+[ext_resource path="res://scripts/combo_container.gd" type="Script" id=2]
+
+[node name="ComboContainer" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="fill1" type="Sprite" parent="."]
+position = Vector2( -14, 0 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 104, 7, 4 )
+
+[node name="fill2" type="Sprite" parent="."]
+position = Vector2( 2, 0 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 104, 7, 4 )
+
+[node name="fill3" type="Sprite" parent="."]
+position = Vector2( 16, 0 )
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 48, 104, 7, 4 )
+
+[node name="Container" type="Sprite" parent="."]
+scale = Vector2( 2, 2 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 64, 88, 24, 5 )
+
+[node name="divs" type="Sprite" parent="Container"]
+position = Vector2( -7, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 15, 100, 9, 4 )
+
+[node name="divs2" type="Sprite" parent="Container"]
+position = Vector2( 1, 0 )
+texture = ExtResource( 1 )
+region_enabled = true
+region_rect = Rect2( 15, 100, 9, 4 )
