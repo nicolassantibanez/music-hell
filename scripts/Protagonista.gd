@@ -100,7 +100,7 @@ func _on_rhythm_system_note_hit(combo:int):
 func _on_rhythm_system_too_many_misses():
 	print("Too many misses!")
 	debuff_timer.start()
-	debuff_factor = 0.3
+	debuff_factor = 0.15
 	player_sprite.self_modulate = Color.green
 
 

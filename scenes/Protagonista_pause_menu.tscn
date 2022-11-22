@@ -8,7 +8,7 @@
 [ext_resource path="res://scenes/Lives.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/rhythm_system.tscn" type="PackedScene" id=7]
 [ext_resource path="res://scenes/ui/pause_menu.tscn" type="PackedScene" id=8]
-[ext_resource path="res://assets/rhythm/catcher_amarillo.png" type="Texture" id=9]
+[ext_resource path="res://assets/bodyShape.png" type="Texture" id=9]
 
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 3.0
@@ -601,7 +601,7 @@ vframes = 4
 shape = SubResource( 1 )
 
 [node name="Sprite" type="Sprite" parent="CollisionShape2D"]
-modulate = Color( 1, 1, 1, 0.396078 )
+modulate = Color( 0, 0.756863, 0.756863, 0.745098 )
 scale = Vector2( 0.22, 0.22 )
 texture = ExtResource( 9 )
 
