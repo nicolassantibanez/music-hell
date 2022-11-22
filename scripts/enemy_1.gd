@@ -20,23 +20,21 @@ func _physics_process(delta):
 	if is_instance_valid(player) and (position - player.position).length() > stop_distance:
 		print("Distancia: ", (position - player.position).length())		
 		move = position.direction_to(player.position) * speed
-	else:
-		move = Vector2.ZERO
 		
 	move = move.normalized()
 	move = move_and_collide(move)
 
 
 # Ver las clase del viernes 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(body:Node):
 	if body != self and body == protagonista:
-		print(body)
 		player = body
 		 
 
 
 func _on_Area2D_body_exited(body):
-	player = null
+	if body != self and body == protagonista:
+		player = null
 
 
 func _fire():
