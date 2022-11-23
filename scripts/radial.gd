@@ -10,6 +10,7 @@ export var spawn_points: int = 60
 export var radius: float = 10
 
 
+
 func _ready():
 	var step = 2 * PI /spawn_points
 	

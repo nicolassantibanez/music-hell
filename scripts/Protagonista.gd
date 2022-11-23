@@ -6,6 +6,8 @@ var SPEED = 100
 var debuff_factor = 1
 var curr_damage = 1
 
+var DEBUGG_MODE = false
+
 onready var pivot = $Pivot
 onready var anim_player = $AnimationPlayer
 onready var anim_tree = $AnimationTree
@@ -28,9 +30,9 @@ func _ready():
 		rhythm_sys.connect("note_hit", self, "_on_rhythm_system_note_hit")
 		rhythm_sys.connect("too_many_misses", self, "_on_rhythm_system_too_many_misses")
 		rhythm_sys.connect("note_missed", self, "_on_rhythm_system_note_missed")
-		print("(debug) Rhythm System is connected!")
+		if DEBUGG_MODE: print("(debug) Rhythm System is connected!")
 	else:
-		print("(debug warning) Rhythm System is null")
+		if DEBUGG_MODE: print("(debug warning) Rhythm System is null")
 	invunerability_timer.connect("timeout", self, "_on_invunerability_timer_timeout")
 	debuff_timer.connect("timeout", self, "_on_debuff_timer_timeout")
 
@@ -107,7 +109,7 @@ func _on_rhythm_system_note_missed(combo: int, miss_count:int):
 		_set_damage_by_combo(combo)
 
 func _on_rhythm_system_too_many_misses():
-	print("Too many misses!")
+	if DEBUGG_MODE: print("Too many misses!")
 	debuff_timer.start()
 	debuff_factor = 0.15
 	player_sprite.self_modulate = Color.green
