@@ -11,5 +11,5 @@ dest_files=[ "res://.import/sailors_battle_theme.mp3-efee81252d1b559299b44370b5a
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0

@@ -32,7 +32,6 @@ color = Color( 0, 0, 0, 0.137255 )
 [node name="MidiPlayer" type="Node" parent="."]
 script = ExtResource( 1 )
 file = "res://audio/music/Melody Town Theme.mid"
-loop = true
 load_all_voices_from_soundfont = false
 sequence_per_seconds = 160
 

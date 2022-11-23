@@ -34,6 +34,7 @@ var left_many_notes_counter = 0
 var right_many_notes_counter = 0
 var combo_count = 0 setget set_combo_count
 var miss_count = 0
+var music_started = false
 
 onready var timer:Timer = get_node("Timer")
 onready var offset_timer:Timer = get_node("OffsetTimer")
@@ -85,7 +86,7 @@ func _ready():
 		timer.set_wait_time(seconds_to_print_test)
 		timer.connect("timeout", self, "_on_timer_timeout")
 		timer.start()
-		
+	
 	midi.set_file(midi_file)	# Se agrega el path del archivo .mid al midi player
 	midi.connect("midi_event", self, "_on_midi_event")
 	
@@ -132,6 +133,11 @@ func _process(delta):
 	
 	if not midi.playing:
 		midi.play()
+	if not music.playing and music_started:
+		music_started = false
+		midi.play()
+		offset_timer.start()
+		
 #	if delta_sum >= offset_midi and not music.playing:
 #		print("Playing midi!")
 #		music.play()
@@ -191,6 +197,7 @@ func _on_timer_timeout():
 func _on_offset_timer_timeout():
 	if DEBUGG_MODE: print("Music Starting!")
 	music.play()
+	self.music_started = true
 	
 func _on_catcher_body_entered(body:Node):
 	body.entered_catcher = true

@@ -11,5 +11,5 @@ dest_files=[ "res://.import/the_journey_continues.ogg-5b490e28e5e66ac0237ef1eb17
 
 [params]
 
-loop=true
-loop_offset=0
+loop=false
+loop_offset=0.0
