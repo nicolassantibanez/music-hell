@@ -97,6 +97,8 @@ func shoot():
 	bullet.position = $Node2D/Position2D.global_position
 	bullet.set_damage(curr_damage)
 	bullet.velocity = get_global_mouse_position() - bullet.position
+	var glow = 1.5 + (damage_value - 1) * 0.15
+	bullet.modulate = Color(glow, glow, glow)
 
 # Puede haber un debuf cuando un contador llegue a cierto punto
 func _on_rhythm_system_note_hit(combo:int):
