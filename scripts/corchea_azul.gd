@@ -10,7 +10,7 @@ onready var protagonista = $"%Protagonista"
 
 func _ready():
 	var mouse_pos = get_global_mouse_position()
-	sprite.modulate = Color(0, 0, 1)
+	sprite.modulate = Color(0.15, 0, 1)
 	area.connect("body_entered", self, "_on_body_entered")
 
 func _physics_process(delta):
