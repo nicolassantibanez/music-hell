@@ -655,6 +655,7 @@ volume_db = -6.003
 position = Vector2( 361, 187 )
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource( 8 )]
+visible = false
 
 [node name="Lives" parent="CanvasLayer" instance=ExtResource( 6 )]
 
