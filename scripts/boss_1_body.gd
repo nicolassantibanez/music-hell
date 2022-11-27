@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 onready var bullet_scene = preload("res://scenes/notas/nota_morada_1.tscn")
 
-var hp: int = 50
+var hp: int = 20
 var fire_activated = true
 
 var player = null
@@ -19,12 +19,18 @@ const attack_types = ["left_attack" , "right_attack", "front_attack"]
 var attack_set = attack_types
 onready var animation_tree = $AnimationTree
 
+# Para la barra de vida
+onready var health_bar = $HealthBar
+
+
 
 func _ready():
 	randomize() # Para randomizar los ataques
 	area_2d.connect("body_entered", self, "_on_Area2D_body_entered")
 	area_2d.connect("body_exited", self, "_on_Area2D_body_exited")
 	timer.connect("timeout", self, "_on_Timer_timeout")
+	health_bar.value = hp
+	health_bar.max_value = hp
 
 func _physics_process(delta):
 	pass
@@ -68,6 +74,7 @@ func _on_Timer_timeout():
 func take_damage(dmg_to_take:int):
 	print("enemigo recibe daño: ", dmg_to_take)
 	hp -= dmg_to_take
+	health_bar.value = hp
 	if hp <= 0:
 		queue_free()
 

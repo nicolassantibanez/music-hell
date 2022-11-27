@@ -1,8 +1,9 @@
-[gd_scene load_steps=27 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/Enemigos/Boss1idle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/patrones/radial.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/boss_1_body.gd" type="Script" id=3]
+[ext_resource path="res://scenes/health_bar.tscn" type="PackedScene" id=4]
 
 [sub_resource type="AnimationNodeAnimation" id=12]
 animation = "idle"
@@ -250,6 +251,7 @@ wait_time = 1.5
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 1.5, 2.5 )
@@ -257,6 +259,12 @@ shape = SubResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource( 1 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 4 )]
+margin_left = -16.0
+margin_top = -24.0
+margin_right = 24.0
+margin_bottom = 16.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
