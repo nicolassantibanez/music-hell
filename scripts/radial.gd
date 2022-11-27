@@ -8,7 +8,7 @@ export var rotate_speed: float = 0
 export var periodo: float = 1
 export var spawn_points: int = 60
 export var radius: float = 10
-
+export var fire: bool = true
 
 
 func _ready():
@@ -32,8 +32,9 @@ func _process(delta):
 
 
 func _on_SpawnTimer_timeout():
-	for s in rotater.get_children():
-		var bullet = bullet_scene.instance()
-		get_parent().get_parent().add_child(bullet)
-		bullet.position = s.global_position
-		bullet.rotation = s.global_rotation
+	if fire:
+		for s in rotater.get_children():
+			var bullet = bullet_scene.instance()
+			get_parent().get_parent().add_child(bullet)
+			bullet.position = s.global_position
+			bullet.rotation = s.global_rotation

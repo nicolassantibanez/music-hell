@@ -1,6 +1,7 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/Enemigos/Boss1idle.png" type="Texture" id=1]
+[ext_resource path="res://scenes/patrones/radial.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/boss_1_body.gd" type="Script" id=3]
 
 [sub_resource type="AnimationNodeAnimation" id=12]
@@ -214,6 +215,9 @@ height = 10.0
 position = Vector2( 200, 100 )
 script = ExtResource( 3 )
 
+[node name="PatronRadial" parent="." instance=ExtResource( 2 )]
+spawn_points = 6
+
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 2 )
 anim_player = NodePath("../AnimationPlayer")
@@ -242,7 +246,7 @@ vframes = 4
 frame = 4
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.7
+wait_time = 1.5
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]
