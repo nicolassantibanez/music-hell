@@ -51,6 +51,7 @@ config/icon="res://icon.png"
 [autoload]
 
 LivesCounter="*res://scripts/LivesCounter.gd"
+Fade="*res://scenes/fade.tscn"
 
 [display]
 

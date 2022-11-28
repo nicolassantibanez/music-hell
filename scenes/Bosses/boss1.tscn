@@ -1,0 +1,271 @@
+[gd_scene load_steps=28 format=2]
+
+[ext_resource path="res://assets/Enemigos/Boss1idle.png" type="Texture" id=1]
+[ext_resource path="res://scenes/patrones/radial.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/boss_1_body.gd" type="Script" id=3]
+[ext_resource path="res://scenes/health_bar.tscn" type="PackedScene" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "inicio"
+
+[sub_resource type="AnimationNodeAnimation" id=22]
+animation = "movimiento_frontal"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "movimiento_lateral_l"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "movimiento_lateral_r"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+switch_mode = 2
+advance_condition = "left_attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+switch_mode = 2
+advance_condition = "right_attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=23]
+switch_mode = 2
+advance_condition = "front_attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=24]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=2]
+states/idle/node = SubResource( 12 )
+states/idle/position = Vector2( 631, 56 )
+states/inicio/node = SubResource( 10 )
+states/inicio/position = Vector2( 338, 64 )
+states/movimiento_frontal/node = SubResource( 22 )
+states/movimiento_frontal/position = Vector2( 639, -91.6791 )
+states/movimiento_lateral_l/node = SubResource( 11 )
+states/movimiento_lateral_l/position = Vector2( 440, 184 )
+states/movimiento_lateral_r/node = SubResource( 13 )
+states/movimiento_lateral_r/position = Vector2( 897, 184 )
+transitions = [ "inicio", "idle", SubResource( 14 ), "movimiento_lateral_l", "idle", SubResource( 15 ), "idle", "movimiento_lateral_l", SubResource( 16 ), "idle", "movimiento_lateral_r", SubResource( 17 ), "movimiento_lateral_r", "idle", SubResource( 18 ), "idle", "movimiento_frontal", SubResource( 23 ), "movimiento_frontal", "idle", SubResource( 24 ) ]
+start_node = "inicio"
+graph_offset = Vector2( 0, -182.679 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=3]
+
+[sub_resource type="GDScript" id=19]
+script/source = "extends AnimationTree
+
+func set_condition(condition_name, value):
+	set(\"parameters/conditions/\" + condition_name,value)
+"
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=20]
+resource_name = "idle"
+length = 2.0
+loop = true
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "increase_idle_count"
+} ]
+}
+
+[sub_resource type="Animation" id=9]
+resource_name = "inicio"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 200, 100 ) ]
+}
+
+[sub_resource type="Animation" id=21]
+resource_name = "movimiento_frontal"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 200, 100 ), Vector2( 200, 200 ), Vector2( 200, 100 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationTree:parameters/conditions/front_attack")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 2 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=8]
+resource_name = "movimiento_lateral_l"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 200, 100 ), Vector2( 100, 100 ), Vector2( 200, 100 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationTree:parameters/conditions/left_attack")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "movimiento_lateral_r"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 2, 4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 200, 100 ), Vector2( 300, 100 ), Vector2( 200, 100 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationTree:parameters/conditions/right_attack")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 4 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
+}
+
+[sub_resource type="RectangleShape2D" id=7]
+extents = Vector2( 305.5, 209.5 )
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 7.0
+height = 10.0
+
+[node name="Boss1" type="KinematicBody2D"]
+position = Vector2( 200, 100 )
+script = ExtResource( 3 )
+
+[node name="PatronRadial" parent="." instance=ExtResource( 2 )]
+spawn_points = 6
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 2 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 3 )
+parameters/conditions/front_attack = false
+parameters/conditions/left_attack = false
+parameters/conditions/right_attack = false
+script = SubResource( 19 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+anims/RESET = SubResource( 4 )
+anims/idle = SubResource( 20 )
+anims/inicio = SubResource( 9 )
+anims/movimiento_frontal = SubResource( 21 )
+anims/movimiento_lateral_l = SubResource( 8 )
+anims/movimiento_lateral_r = SubResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="."]
+position = Vector2( 0.384, 0 )
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 1 )
+hframes = 2
+vframes = 4
+frame = 4
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1.5
+autostart = true
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2( 1.5, 2.5 )
+shape = SubResource( 7 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 1 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 4 )]
+margin_left = -16.0
+margin_top = -24.0
+margin_right = 24.0
+margin_bottom = 16.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]

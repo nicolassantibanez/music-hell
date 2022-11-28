@@ -5,6 +5,9 @@ signal note_hit(combo)
 signal note_missed(combo)
 signal too_many_misses()
 
+var DEBUGG_MODE = false
+
+
 const MISSES_TO_DEBUF = 5
 const MAX_COMBO = 10
 const HIT_PARTICLES_PATH = preload("res://scenes/note_hit_particles.tscn")
@@ -104,7 +107,7 @@ func _process(delta):
 					miss_count = 0
 					s.queue.pop_front().hit(s.node.global_position)
 					_note_hit_feedback(s)
-					print("hit, combo=", combo_count)
+					if DEBUGG_MODE: print("hit, combo=", combo_count)
 					emit_signal("note_hit", combo_count)
 				else:
 					set_combo_count(0)
@@ -112,10 +115,10 @@ func _process(delta):
 					_note_miss_feedback()
 					if miss_count >= MISSES_TO_DEBUF:
 						emit_signal("too_many_misses")
-					print("TOO EARLY")
 					emit_signal("note_missed", combo_count, miss_count)
+					if DEBUGG_MODE: print("TOO EARLY")
 			else:
-				print("WUT??")
+				if DEBUGG_MODE: print("WUT??")
 				
 		if not s.queue.empty():
 			if s.queue.front().test_miss():
@@ -175,18 +178,18 @@ func _spawn_note_over_catcher(catcher):
 #		play_note.color             = catcher.color
 		catcher.queue.push_back(play_note)
 	else:
-		print("(debug) catcher ", catcher, " doesn't exist!")
+		if DEBUGG_MODE: print("(debug) catcher ", catcher, " doesn't exist!")
 	
 
 func _on_timer_timeout():
-	print("---> Tests results! <---")
+	if DEBUGG_MODE: print("---> Tests results! <---")
 	for track in played_notes.keys():
-		print(track+":")
+		if DEBUGG_MODE: print(track+":")
 		for note in played_notes[track].keys():
-			print("  -> Nota ", note, " : ", played_notes[track][note])
+			if DEBUGG_MODE: print("  -> Nota ", note, " : ", played_notes[track][note])
 
 func _on_offset_timer_timeout():
-	print("Music Starting!")
+	if DEBUGG_MODE: print("Music Starting!")
 	music.play()
 	
 func _on_catcher_body_entered(body:Node):
