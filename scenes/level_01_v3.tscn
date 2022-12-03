@@ -384,7 +384,7 @@ tile_data = PoolIntArray( -2, 6, 0, -1, 14, 0, -65536, 14, 0, -65535, 14, 0, -65
 
 [node name="BasicRoom" parent="." instance=ExtResource( 2 )]
 position = Vector2( 367, 64 )
-enemies_to_spawn = 43
+enemies_to_spawn = 2
 
 [node name="YSort" type="YSort" parent="."]
 

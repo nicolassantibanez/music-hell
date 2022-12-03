@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://assets/Fondo/atlas_16x.png" type="Texture" id=1]
 [ext_resource path="res://assets/Fondo/LaserGate1.PNG" type="Texture" id=2]
 [ext_resource path="res://scripts/basic_room.gd" type="Script" id=3]
+[ext_resource path="res://scenes/room_gate.tscn" type="PackedScene" id=4]
 
 [sub_resource type="ConvexPolygonShape2D" id=14]
 points = PoolVector2Array( 8, 16, 0, 16, 0, 8, 8, 8 )
@@ -398,7 +399,15 @@ format = 1
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea2D"]
 shape = SubResource( 27 )
 
+[node name="LeftGate" parent="." instance=ExtResource( 4 )]
+position = Vector2( -112, -4 )
+
+[node name="RightGate" parent="." instance=ExtResource( 4 )]
+position = Vector2( 112, -4 )
+rotation = 3.14159
+
 [node name="Gate" type="Sprite" parent="."]
+visible = false
 position = Vector2( -112, -3.83029 )
 rotation = 4.71239
 scale = Vector2( 0.413536, 0.41 )
