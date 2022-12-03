@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://assets/Enemigos/Boss1idle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/patrones/radial.tscn" type="PackedScene" id=2]
@@ -10,6 +10,9 @@ animation = "idle"
 
 [sub_resource type="AnimationNodeAnimation" id=10]
 animation = "inicio"
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "media_vida"
 
 [sub_resource type="AnimationNodeAnimation" id=22]
 animation = "movimiento_frontal"
@@ -48,18 +51,28 @@ advance_condition = "front_attack"
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=27]
+switch_mode = 2
+advance_condition = "half_life"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=28]
+switch_mode = 2
+auto_advance = true
+
 [sub_resource type="AnimationNodeStateMachine" id=2]
 states/idle/node = SubResource( 12 )
 states/idle/position = Vector2( 631, 56 )
 states/inicio/node = SubResource( 10 )
 states/inicio/position = Vector2( 338, 64 )
+states/media_vida/node = SubResource( 26 )
+states/media_vida/position = Vector2( 919, -35.679 )
 states/movimiento_frontal/node = SubResource( 22 )
 states/movimiento_frontal/position = Vector2( 639, -91.6791 )
 states/movimiento_lateral_l/node = SubResource( 11 )
 states/movimiento_lateral_l/position = Vector2( 440, 184 )
 states/movimiento_lateral_r/node = SubResource( 13 )
 states/movimiento_lateral_r/position = Vector2( 897, 184 )
-transitions = [ "inicio", "idle", SubResource( 14 ), "movimiento_lateral_l", "idle", SubResource( 15 ), "idle", "movimiento_lateral_l", SubResource( 16 ), "idle", "movimiento_lateral_r", SubResource( 17 ), "movimiento_lateral_r", "idle", SubResource( 18 ), "idle", "movimiento_frontal", SubResource( 23 ), "movimiento_frontal", "idle", SubResource( 24 ) ]
+transitions = [ "inicio", "idle", SubResource( 14 ), "movimiento_lateral_l", "idle", SubResource( 15 ), "idle", "movimiento_lateral_l", SubResource( 16 ), "idle", "movimiento_lateral_r", SubResource( 17 ), "movimiento_lateral_r", "idle", SubResource( 18 ), "idle", "movimiento_frontal", SubResource( 23 ), "movimiento_frontal", "idle", SubResource( 24 ), "idle", "media_vida", SubResource( 27 ), "media_vida", "idle", SubResource( 28 ) ]
 start_node = "inicio"
 graph_offset = Vector2( 0, -182.679 )
 
@@ -119,6 +132,42 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ Vector2( 200, 100 ) ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "media_vida"
+length = 6.0
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 5.8, 6 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "_inicio_media_vida"
+}, {
+"args": [  ],
+"method": "_fin_media_vida"
+}, {
+"args": [  ],
+"method": "increase_idle_count"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("AnimationTree:parameters/conditions/half_life")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 6 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ false ]
 }
 
 [sub_resource type="Animation" id=21]
@@ -225,6 +274,7 @@ anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 3 )
 parameters/conditions/front_attack = false
+parameters/conditions/half_life = false
 parameters/conditions/left_attack = false
 parameters/conditions/right_attack = false
 script = SubResource( 19 )
@@ -234,6 +284,7 @@ reset_on_save = false
 anims/RESET = SubResource( 4 )
 anims/idle = SubResource( 20 )
 anims/inicio = SubResource( 9 )
+anims/media_vida = SubResource( 25 )
 anims/movimiento_frontal = SubResource( 21 )
 anims/movimiento_lateral_l = SubResource( 8 )
 anims/movimiento_lateral_r = SubResource( 5 )
@@ -266,6 +317,7 @@ margin_top = -24.0
 margin_right = 24.0
 margin_bottom = 16.0
 
+[connection signal="spawn_points_changed" from="." to="PatronRadial" method="_on_Boss1_spawn_points_changed"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
 [connection signal="body_exited" from="Area2D" to="." method="_on_Area2D_body_exited"]
