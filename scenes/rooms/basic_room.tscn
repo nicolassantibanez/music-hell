@@ -1,7 +1,8 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=20 format=2]
 
 [ext_resource path="res://assets/Fondo/atlas_16x.png" type="Texture" id=1]
 [ext_resource path="res://assets/Fondo/LaserGate1.PNG" type="Texture" id=2]
+[ext_resource path="res://scripts/basic_room.gd" type="Script" id=3]
 
 [sub_resource type="ConvexPolygonShape2D" id=14]
 points = PoolVector2Array( 8, 16, 0, 16, 0, 8, 8, 8 )
@@ -379,6 +380,7 @@ points = PoolVector2Array( 8, 0, 16, 0, 16, 8, 8, 8 )
 extents = Vector2( 96, 64 )
 
 [node name="BasicRoom" type="Node2D"]
+script = ExtResource( 3 )
 
 [node name="RoomMap" type="TileMap" parent="."]
 tile_set = SubResource( 25 )
@@ -391,9 +393,9 @@ tile_set = SubResource( 26 )
 cell_size = Vector2( 32, 32 )
 format = 1
 
-[node name="RoomArea" type="Area2D" parent="."]
+[node name="RoomArea2D" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea2D"]
 shape = SubResource( 27 )
 
 [node name="Gate" type="Sprite" parent="."]
