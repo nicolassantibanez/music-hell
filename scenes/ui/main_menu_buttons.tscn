@@ -10,7 +10,7 @@ outline_size = 3
 outline_color = Color( 0, 0, 0, 1 )
 font_data = ExtResource( 1 )
 
-[node name="MainMenu" type="MarginContainer"]
+[node name="MainMenuButtons" type="MarginContainer"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = ExtResource( 2 )
@@ -38,11 +38,11 @@ margin_right = 350.0
 margin_bottom = 64.0
 text = "Play"
 
-[node name="Controls" type="Button" parent="VBoxContainer"]
+[node name="Tutorial" type="Button" parent="VBoxContainer"]
 margin_top = 68.0
 margin_right = 350.0
 margin_bottom = 86.0
-text = "Controls"
+text = "Tutorial"
 
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 margin_left = 134.0
