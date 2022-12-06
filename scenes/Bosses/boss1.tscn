@@ -1,9 +1,12 @@
-[gd_scene load_steps=32 format=2]
+[gd_scene load_steps=39 format=2]
 
 [ext_resource path="res://assets/Enemigos/Boss1idle.png" type="Texture" id=1]
 [ext_resource path="res://scenes/patrones/radial.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/boss_1_body.gd" type="Script" id=3]
 [ext_resource path="res://scenes/health_bar.tscn" type="PackedScene" id=4]
+
+[sub_resource type="AnimationNodeAnimation" id=36]
+animation = "death"
 
 [sub_resource type="AnimationNodeAnimation" id=12]
 animation = "idle"
@@ -59,22 +62,39 @@ advance_condition = "half_life"
 switch_mode = 2
 auto_advance = true
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=37]
+advance_condition = "death"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=38]
+advance_condition = "death"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=39]
+advance_condition = "death"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=40]
+advance_condition = "death"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=41]
+advance_condition = "death"
+
 [sub_resource type="AnimationNodeStateMachine" id=2]
+states/death/node = SubResource( 36 )
+states/death/position = Vector2( 368.813, -106.679 )
 states/idle/node = SubResource( 12 )
-states/idle/position = Vector2( 631, 56 )
+states/idle/position = Vector2( 631, 59 )
 states/inicio/node = SubResource( 10 )
-states/inicio/position = Vector2( 338, 64 )
+states/inicio/position = Vector2( 340, 64 )
 states/media_vida/node = SubResource( 26 )
 states/media_vida/position = Vector2( 919, -35.679 )
 states/movimiento_frontal/node = SubResource( 22 )
-states/movimiento_frontal/position = Vector2( 639, -91.6791 )
+states/movimiento_frontal/position = Vector2( 690, -89.6791 )
 states/movimiento_lateral_l/node = SubResource( 11 )
-states/movimiento_lateral_l/position = Vector2( 440, 184 )
+states/movimiento_lateral_l/position = Vector2( 434, 184 )
 states/movimiento_lateral_r/node = SubResource( 13 )
 states/movimiento_lateral_r/position = Vector2( 897, 184 )
-transitions = [ "inicio", "idle", SubResource( 14 ), "movimiento_lateral_l", "idle", SubResource( 15 ), "idle", "movimiento_lateral_l", SubResource( 16 ), "idle", "movimiento_lateral_r", SubResource( 17 ), "movimiento_lateral_r", "idle", SubResource( 18 ), "idle", "movimiento_frontal", SubResource( 23 ), "movimiento_frontal", "idle", SubResource( 24 ), "idle", "media_vida", SubResource( 27 ), "media_vida", "idle", SubResource( 28 ) ]
+transitions = [ "inicio", "idle", SubResource( 14 ), "movimiento_lateral_l", "idle", SubResource( 15 ), "idle", "movimiento_lateral_l", SubResource( 16 ), "idle", "movimiento_lateral_r", SubResource( 17 ), "movimiento_lateral_r", "idle", SubResource( 18 ), "idle", "movimiento_frontal", SubResource( 23 ), "movimiento_frontal", "idle", SubResource( 24 ), "idle", "media_vida", SubResource( 27 ), "media_vida", "idle", SubResource( 28 ), "idle", "death", SubResource( 37 ), "movimiento_frontal", "death", SubResource( 38 ), "movimiento_lateral_l", "death", SubResource( 39 ), "media_vida", "death", SubResource( 40 ), "movimiento_lateral_r", "death", SubResource( 41 ) ]
 start_node = "inicio"
-graph_offset = Vector2( 0, -182.679 )
+graph_offset = Vector2( 98.8128, -182.679 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=3]
 
@@ -99,6 +119,59 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 0, 0 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 5 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=35]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.376471, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queque_free2"
+} ]
+}
 
 [sub_resource type="Animation" id=20]
 resource_name = "idle"
@@ -117,6 +190,18 @@ tracks/0/keys = {
 "args": [  ],
 "method": "increase_idle_count"
 } ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 4, 5, 4, 5, 4, 5, 4, 5 ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -169,6 +254,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8, 4, 4.2, 4.4, 4.6, 4.8, 5, 5.2, 5.4, 5.6, 5.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5 ]
+}
 
 [sub_resource type="Animation" id=21]
 resource_name = "movimiento_frontal"
@@ -197,10 +294,22 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 4, 5, 4, 5, 4, 5, 4, 5 ]
+}
 
 [sub_resource type="Animation" id=8]
 resource_name = "movimiento_lateral_l"
-length = 4.0
+length = 3.0
 tracks/0/type = "value"
 tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
@@ -208,7 +317,7 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 2, 4 ),
+"times": PoolRealArray( 0, 1.5, 3 ),
 "transitions": PoolRealArray( 1, 1, 1 ),
 "update": 0,
 "values": [ Vector2( 200, 100 ), Vector2( 100, 100 ), Vector2( 200, 100 ) ]
@@ -220,10 +329,22 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 4 ),
+"times": PoolRealArray( 3 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4 ]
 }
 
 [sub_resource type="Animation" id=5]
@@ -253,6 +374,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [ false ]
 }
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4, 0.6, 0.8, 1, 1.2, 1.4, 1.6, 1.8, 2, 2.2, 2.4, 2.6, 2.8, 3, 3.2, 3.4, 3.6, 3.8 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5, 4, 5 ]
+}
 
 [sub_resource type="RectangleShape2D" id=7]
 extents = Vector2( 305.5, 209.5 )
@@ -273,6 +406,7 @@ tree_root = SubResource( 2 )
 anim_player = NodePath("../AnimationPlayer")
 active = true
 parameters/playback = SubResource( 3 )
+parameters/conditions/death = false
 parameters/conditions/front_attack = false
 parameters/conditions/half_life = false
 parameters/conditions/left_attack = false
@@ -282,6 +416,7 @@ script = SubResource( 19 )
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 anims/RESET = SubResource( 4 )
+anims/death = SubResource( 35 )
 anims/idle = SubResource( 20 )
 anims/inicio = SubResource( 9 )
 anims/media_vida = SubResource( 25 )
@@ -295,14 +430,13 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 hframes = 2
 vframes = 4
-frame = 4
+frame = 5
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5
 autostart = true
 
 [node name="Area2D" type="Area2D" parent="."]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 1.5, 2.5 )

@@ -99,5 +99,8 @@ func take_damage(dmg_to_take:int):
 	hp -= dmg_to_take
 	health_bar.value = hp
 	if hp <= 0:
-		queue_free()
+		animation_tree.set_condition("death", true)
+#		queue_free()
 
+func queque_free2():
+	queue_free()
