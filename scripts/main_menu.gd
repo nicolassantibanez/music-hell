@@ -13,7 +13,7 @@ func _ready():
 	tutorial.connect("pressed", self, "_on_tutorial_pressed")
 
 func _on_play_pressed():
-	get_tree().change_scene("res://scenes/level_changer.tscn")
+	get_tree().change_scene("res://scenes/level_01_oficial.tscn")
 
 func _on_credits_pressed():
 	get_tree().change_scene("res://scenes/ui/credits.tscn")
