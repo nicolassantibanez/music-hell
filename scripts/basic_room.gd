@@ -34,7 +34,7 @@ func _spawn_enemies():
 		var room_y = room_shape.shape.extents.y
 		var spawn_pos = Vector2(rand_range(-room_x, room_x) + global_position.x, rand_range(-room_y, room_y) + global_position.y)
 		var enemy = ENEMY_PATH.instance()
-		enemy.player = protagonista
+#		enemy.player = protagonista
 		enemy.position = spawn_pos
 		get_parent().add_child(enemy)
 		current_enemies += 1
@@ -49,7 +49,7 @@ func _close_gates():
 
 func _on_room_area2d_body_entered(body: Node):
 	if body == protagonista and not _player_entered:
-		# TODO: Cerramos las puertas del room
+		# Cerramos las puertas del room
 		_player_entered = true
 		_close_gates()
 		_spawn_enemies()
