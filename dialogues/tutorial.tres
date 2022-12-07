@@ -1,0 +1,141 @@
+[gd_resource type="Resource" load_steps=2 format=2]
+
+[ext_resource path="res://addons/dialogue_manager/dialogue_resource.gd" type="Script" id=1]
+
+[resource]
+script = ExtResource( 1 )
+resource_version = 12
+syntax_version = 2
+raw_text = "~ Tutorial
+
+Welcome to Music Hell, now we'll tell how to play the game.
+First\\: Moving
+To move use WASD, W to go forward, S to go backwards, A to go left and D to go right.
+Second\\: Shooting
+To shoot, you need to hit the right or left note on the note catcher and move the mouse to the place you want to shoot at.
+Third\\: Focus mode
+If you press shift, the focus mode will activate which consist on the player getting slower to make more precise movements and the hitbox is visible so the player can dodge easily.
+Fourth\\: Debuff and Mutiplier
+If you hit notes in a row you'll get a mutiplier for your bullets, on the other hand if you miss many notes in a row you will get a debuff, meaning a significant slow down for quite a bit.
+
+Would you like to start again or exit?
+- Start again => Tutorial
+- Exit
+	Now go forward and step on the godot to change level."
+errors = [  ]
+titles = {
+"Tutorial": "2"
+}
+lines = {
+"0": {
+"next_id": "2",
+"text": "Tutorial",
+"type": "title"
+},
+"10": {
+"character": "",
+"next_id": "12",
+"replacements": [  ],
+"text": "If you hit notes in a row you'll get a mutiplier for your bullets, on the other hand if you miss many notes in a row you will get a debuff, meaning a significant slow down for quite a bit.",
+"translation_key": "If you hit notes in a row you'll get a mutiplier for your bullets, on the other hand if you miss many notes in a row you will get a debuff, meaning a significant slow down for quite a bit.",
+"type": "dialogue"
+},
+"12": {
+"character": "",
+"next_id": "13",
+"replacements": [  ],
+"text": "Would you like to start again or exit?",
+"translation_key": "Would you like to start again or exit?",
+"type": "dialogue"
+},
+"13": {
+"next_id": "2",
+"next_id_after": "end!",
+"replacements": [  ],
+"responses": PoolStringArray( "13", "14" ),
+"text": "Start again",
+"translation_key": "Start again",
+"type": "response"
+},
+"14": {
+"next_id": "15",
+"next_id_after": "end!",
+"replacements": [  ],
+"text": "Exit",
+"translation_key": "Exit",
+"type": "response"
+},
+"15": {
+"character": "",
+"next_id": "end!",
+"parent_id": "14",
+"replacements": [  ],
+"text": "Now go forward and step on the godot to change level.",
+"translation_key": "Now go forward and step on the godot to change level.",
+"type": "dialogue"
+},
+"2": {
+"character": "",
+"next_id": "3",
+"replacements": [  ],
+"text": "Welcome to Music Hell, now we'll tell how to play the game.",
+"translation_key": "Welcome to Music Hell, now we'll tell how to play the game.",
+"type": "dialogue"
+},
+"3": {
+"character": "",
+"next_id": "4",
+"replacements": [  ],
+"text": "First: Moving",
+"translation_key": "First: Moving",
+"type": "dialogue"
+},
+"4": {
+"character": "",
+"next_id": "5",
+"replacements": [  ],
+"text": "To move use WASD, W to go forward, S to go backwards, A to go left and D to go right.",
+"translation_key": "To move use WASD, W to go forward, S to go backwards, A to go left and D to go right.",
+"type": "dialogue"
+},
+"5": {
+"character": "",
+"next_id": "6",
+"replacements": [  ],
+"text": "Second: Shooting",
+"translation_key": "Second: Shooting",
+"type": "dialogue"
+},
+"6": {
+"character": "",
+"next_id": "7",
+"replacements": [  ],
+"text": "To shoot, you need to hit the right or left note on the note catcher and move the mouse to the place you want to shoot at.",
+"translation_key": "To shoot, you need to hit the right or left note on the note catcher and move the mouse to the place you want to shoot at.",
+"type": "dialogue"
+},
+"7": {
+"character": "",
+"next_id": "8",
+"replacements": [  ],
+"text": "Third: Focus mode",
+"translation_key": "Third: Focus mode",
+"type": "dialogue"
+},
+"8": {
+"character": "",
+"next_id": "9",
+"replacements": [  ],
+"text": "If you press shift, the focus mode will activate which consist on the player getting slower to make more precise movements and the hitbox is visible so the player can dodge easily.",
+"translation_key": "If you press shift, the focus mode will activate which consist on the player getting slower to make more precise movements and the hitbox is visible so the player can dodge easily.",
+"type": "dialogue"
+},
+"9": {
+"character": "",
+"next_id": "10",
+"replacements": [  ],
+"text": "Fourth: Debuff and Mutiplier",
+"translation_key": "Fourth: Debuff and Mutiplier",
+"type": "dialogue"
+}
+}
