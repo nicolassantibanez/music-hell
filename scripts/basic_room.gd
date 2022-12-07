@@ -34,9 +34,9 @@ func _spawn_enemies():
 		var room_y = room_shape.shape.extents.y
 		var spawn_pos = Vector2(rand_range(-room_x, room_x) + global_position.x, rand_range(-room_y, room_y) + global_position.y)
 		var enemy = ENEMY_PATH.instance()
-#		enemy.player = protagonista
 		enemy.position = spawn_pos
 		get_parent().add_child(enemy)
+		enemy.protagonista = self.protagonista
 		current_enemies += 1
 
 func _open_gates():
