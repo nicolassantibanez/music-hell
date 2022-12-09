@@ -34,6 +34,7 @@ func _ready():
 	timer.connect("timeout", self, "_on_Timer_timeout")
 	health_bar.value = hp
 	health_bar.max_value = hp
+	_fin_media_vida()
 
 func _physics_process(delta):
 	pass

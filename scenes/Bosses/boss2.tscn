@@ -1,0 +1,475 @@
+[gd_scene load_steps=39 format=2]
+
+[ext_resource path="res://assets/Enemigos/Boss2idle.png" type="Texture" id=1]
+[ext_resource path="res://scenes/health_bar.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/boss2.gd" type="Script" id=3]
+[ext_resource path="res://scenes/patrones/radial.tscn" type="PackedScene" id=4]
+
+[sub_resource type="Animation" id=3]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 4 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath(".:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 210, 160 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "death"
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.376471, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queque_free2"
+} ]
+}
+
+[sub_resource type="Animation" id=4]
+resource_name = "idle"
+length = 3.0
+loop = true
+step = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5, 1, 1.5, 2, 2.5 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 4, 5, 4, 5, 4, 5 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 3 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "increase_idle_count"
+} ]
+}
+
+[sub_resource type="Animation" id=17]
+resource_name = "inicio"
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 210, 160 ) ]
+}
+
+[sub_resource type="Animation" id=16]
+resource_name = "movement_ne"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 3.1, 5, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 210, 160 ), Vector2( 310, 60 ), Vector2( 310, 60 ), Vector2( 260, 140 ), Vector2( 210, 160 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "activate_pattern"
+}, {
+"args": [  ],
+"method": "deactivate_pattern"
+} ]
+}
+
+[sub_resource type="Animation" id=23]
+resource_name = "movement_nw"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 3, 5, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 210, 160 ), Vector2( 100, 60 ), Vector2( 100, 60 ), Vector2( 120, 140 ), Vector2( 210, 160 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "activate_pattern"
+}, {
+"args": [  ],
+"method": "deactivate_pattern"
+} ]
+}
+
+[sub_resource type="Animation" id=25]
+resource_name = "movement_se"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 2.9, 5, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 210, 160 ), Vector2( 290, 260 ), Vector2( 290, 260 ), Vector2( 200, 210 ), Vector2( 210, 160 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "activate_pattern"
+}, {
+"args": [  ],
+"method": "deactivate_pattern"
+} ]
+}
+
+[sub_resource type="Animation" id=24]
+resource_name = "movement_sw"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1.5, 3, 5, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 210, 160 ), Vector2( 100, 260 ), Vector2( 100, 260 ), Vector2( 150, 180 ), Vector2( 210, 160 ) ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 1.5, 5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"values": [ {
+"args": [  ],
+"method": "activate_pattern"
+}, {
+"args": [  ],
+"method": "deactivate_pattern"
+} ]
+}
+
+[sub_resource type="Animation" id=12]
+resource_name = "spawn_minions"
+length = 1.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.4, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 1.5, 1.5 ), Vector2( 2, 2 ), Vector2( 1.5, 1.5 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.4, 1.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 0.929412, 0.329412, 0.894118, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+tracks/2/type = "method"
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.6 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spawn_minions"
+} ]
+}
+
+[sub_resource type="AnimationNodeAnimation" id=6]
+animation = "death"
+
+[sub_resource type="AnimationNodeAnimation" id=7]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=18]
+animation = "inicio"
+
+[sub_resource type="AnimationNodeAnimation" id=20]
+animation = "movement_ne"
+
+[sub_resource type="AnimationNodeAnimation" id=26]
+animation = "movement_nw"
+
+[sub_resource type="AnimationNodeAnimation" id=27]
+animation = "movement_se"
+
+[sub_resource type="AnimationNodeAnimation" id=28]
+animation = "movement_sw"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "spawn_minions"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=8]
+switch_mode = 2
+advance_condition = "death"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+switch_mode = 2
+advance_condition = "spawn_minions"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+switch_mode = 2
+advance_condition = "movement_ne"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=22]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=29]
+switch_mode = 2
+advance_condition = "movement_nw"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=30]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=31]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=32]
+switch_mode = 2
+advance_condition = "movement_sw"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=33]
+switch_mode = 2
+advance_condition = "movement_se"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=34]
+switch_mode = 2
+auto_advance = true
+
+[sub_resource type="AnimationNodeStateMachine" id=9]
+states/death/node = SubResource( 6 )
+states/death/position = Vector2( 691, 174 )
+states/idle/node = SubResource( 7 )
+states/idle/position = Vector2( 391, 169 )
+states/inicio/node = SubResource( 18 )
+states/inicio/position = Vector2( 149, 160 )
+states/movement_ne/node = SubResource( 20 )
+states/movement_ne/position = Vector2( 642, 27 )
+states/movement_nw/node = SubResource( 26 )
+states/movement_nw/position = Vector2( 232, 27 )
+states/movement_se/node = SubResource( 27 )
+states/movement_se/position = Vector2( 718, 369 )
+states/movement_sw/node = SubResource( 28 )
+states/movement_sw/position = Vector2( 140, 369 )
+states/spawn_minions/node = SubResource( 13 )
+states/spawn_minions/position = Vector2( 404, 362 )
+transitions = [ "idle", "death", SubResource( 8 ), "idle", "spawn_minions", SubResource( 14 ), "spawn_minions", "idle", SubResource( 15 ), "inicio", "idle", SubResource( 19 ), "idle", "movement_ne", SubResource( 21 ), "movement_ne", "idle", SubResource( 22 ), "idle", "movement_nw", SubResource( 29 ), "movement_nw", "idle", SubResource( 30 ), "movement_sw", "idle", SubResource( 31 ), "idle", "movement_sw", SubResource( 32 ), "idle", "movement_se", SubResource( 33 ), "movement_se", "idle", SubResource( 34 ) ]
+start_node = "inicio"
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=10]
+
+[sub_resource type="GDScript" id=11]
+script/source = "extends AnimationTree
+
+func set_condition(condition_name, value):
+	set(\"parameters/conditions/\" + condition_name,value)
+"
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 305.5, 209.5 )
+
+[sub_resource type="CapsuleShape2D" id=2]
+height = 6.0
+
+[node name="Boss2" type="KinematicBody2D"]
+position = Vector2( 210, 160 )
+script = ExtResource( 3 )
+
+[node name="Patron1" parent="." instance=ExtResource( 4 )]
+periodo = 0.1
+spawn_points = 3
+
+[node name="Patron2" parent="." instance=ExtResource( 4 )]
+rotate_speed = 0.0
+periodo = 1.2
+spawn_points = 40
+
+[node name="Sprite" type="Sprite" parent="."]
+scale = Vector2( 1.5, 1.5 )
+texture = ExtResource( 1 )
+hframes = 2
+vframes = 4
+frame = 4
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 3 )
+anims/death = SubResource( 5 )
+anims/idle = SubResource( 4 )
+anims/inicio = SubResource( 17 )
+anims/movement_ne = SubResource( 16 )
+anims/movement_nw = SubResource( 23 )
+anims/movement_se = SubResource( 25 )
+anims/movement_sw = SubResource( 24 )
+anims/spawn_minions = SubResource( 12 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 9 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 10 )
+parameters/conditions/death = false
+parameters/conditions/movement_ne = false
+parameters/conditions/movement_nw = false
+parameters/conditions/movement_se = false
+parameters/conditions/movement_sw = false
+parameters/conditions/spawn_minions = false
+script = SubResource( 11 )
+
+[node name="Area2D" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource( 1 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource( 2 )
+
+[node name="HealthBar" parent="." instance=ExtResource( 2 )]
+margin_left = -16.0
+margin_top = -24.0
+margin_right = 24.0
+margin_bottom = 16.0
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true

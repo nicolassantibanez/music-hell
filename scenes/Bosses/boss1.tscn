@@ -81,7 +81,7 @@ advance_condition = "death"
 states/death/node = SubResource( 36 )
 states/death/position = Vector2( 368.813, -106.679 )
 states/idle/node = SubResource( 12 )
-states/idle/position = Vector2( 631, 59 )
+states/idle/position = Vector2( 633, 59 )
 states/inicio/node = SubResource( 10 )
 states/inicio/position = Vector2( 340, 64 )
 states/media_vida/node = SubResource( 26 )
@@ -399,6 +399,8 @@ position = Vector2( 200, 100 )
 script = ExtResource( 3 )
 
 [node name="PatronRadial" parent="." instance=ExtResource( 2 )]
+rotate_speed = 10.0
+periodo = 0.8
 spawn_points = 6
 
 [node name="AnimationTree" type="AnimationTree" parent="."]

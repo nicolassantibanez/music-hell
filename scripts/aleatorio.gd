@@ -6,9 +6,9 @@ onready var rotater = $Rotater
 
 var rng = RandomNumberGenerator.new()
 
-var rotate_speed: float = 0
-var periodo: float = 1
-var spawn_points: int = 150
+export var rotate_speed: float = 0
+export var periodo: float = 1
+export var spawn_points: int = 150
 export var radius: float = 10
 export var umbral: float = 0.5
 
