@@ -291,6 +291,18 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Vector2( 200, 100 ) ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ) ]
+}
 
 [sub_resource type="Animation" id=25]
 resource_name = "media_vida"
@@ -657,13 +669,12 @@ anims/movimiento_lateral_l = SubResource( 8 )
 anims/movimiento_lateral_r = SubResource( 5 )
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 1, 0.658824, 0.658824, 1 )
 position = Vector2( 0.384, 0 )
 scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 hframes = 2
 vframes = 4
-frame = 5
+frame = 4
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 1.5
