@@ -32,7 +32,6 @@ color = Color( 0, 0, 0, 0.137255 )
 [node name="MidiPlayer" type="Node" parent="."]
 script = ExtResource( 1 )
 file = "res://audio/music/Melody Town Theme.mid"
-loop = true
 load_all_voices_from_soundfont = false
 sequence_per_seconds = 160
 
@@ -48,7 +47,7 @@ custom_texture = ExtResource( 5 )
 
 [node name="right_catcher" parent="Buttons" instance=ExtResource( 4 )]
 position = Vector2( 380, 160 )
-color = Color( 0.376471, 0.784314, 0.0705882, 1 )
+color = Color( 0, 1, 0.0509804, 1 )
 custom_texture = ExtResource( 6 )
 
 [node name="Timer" type="Timer" parent="."]

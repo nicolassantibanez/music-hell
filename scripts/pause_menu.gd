@@ -22,6 +22,7 @@ func _ready():
 	vol.connect("value_changed", self, "_on_value_changed")
 	
 	value = db2linear(AudioServer.get_bus_volume_db(_bus))
+	vol.value = value
 	hide()
 
 
