@@ -95,7 +95,7 @@ states/movimiento_lateral_r/node = SubResource( 13 )
 states/movimiento_lateral_r/position = Vector2( 897, 184 )
 transitions = [ "inicio", "idle", SubResource( 14 ), "movimiento_lateral_l", "idle", SubResource( 15 ), "idle", "movimiento_lateral_l", SubResource( 16 ), "idle", "movimiento_lateral_r", SubResource( 17 ), "movimiento_lateral_r", "idle", SubResource( 18 ), "idle", "movimiento_frontal", SubResource( 23 ), "movimiento_frontal", "idle", SubResource( 24 ), "idle", "media_vida", SubResource( 27 ), "media_vida", "idle", SubResource( 28 ), "idle", "death", SubResource( 37 ), "movimiento_frontal", "death", SubResource( 38 ), "movimiento_lateral_l", "death", SubResource( 39 ), "media_vida", "death", SubResource( 40 ), "movimiento_lateral_r", "death", SubResource( 41 ) ]
 start_node = "inicio"
-graph_offset = Vector2( 98.8128, -116.118 )
+graph_offset = Vector2( 69.8128, -166.118 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=3]
 
@@ -636,6 +636,7 @@ spawn_points = 6
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 2 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 3 )
 parameters/conditions/death = false
 parameters/conditions/front_attack = false

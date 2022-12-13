@@ -111,6 +111,7 @@ func spawn_minions():
 		minion.position = get_global_position() + Vector2(rng.randi_range(-50, 50), rng.randi_range(-50, 50))
 		# TODO: ver como hacer que se muevan los minions
 		get_parent().add_child(minion)
+		minion.protagonista = self.protagonista
 
 func _fire():
 	var bullet = bullet_scene.instance()
