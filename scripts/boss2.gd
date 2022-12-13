@@ -18,7 +18,7 @@ var bullet_counter = 0
 const big_bullet = 10
 
 var _idle_count = 0
-var attack_period = 4
+var attack_period = 2
 const attack_types = ["movement_ne", "movement_nw", "movement_se", "movement_sw", "spawn_minions"]
 var attack_set = attack_types
 
@@ -33,6 +33,13 @@ onready var health_bar = $HealthBar
 onready var animation_tree = $AnimationTree
 var rng = RandomNumberGenerator.new()
 
+var move = Vector2.ZERO
+export var speed: float = 1
+var stop_distance = 90.0
+
+var half_life = false
+
+var fire_time: float = 1.0
 signal spawn_points_changed()
 
 func _ready():
@@ -54,6 +61,16 @@ func _ready():
 	timer.connect("timeout", self, "_on_Timer_timeout")
 	health_bar.value = hp
 	health_bar.max_value = hp
+
+
+func _physics_process(delta):
+	if half_life:
+		move = Vector2.ZERO
+		if is_instance_valid(player) and (position - player.position).length() > stop_distance:
+			# print("Distancia: ", (position - player.position).length())		
+			move = position.direction_to(player.position) * speed	
+		move = move.normalized()
+		move = move_and_collide(move)
 
 
 func _on_Area2D_body_entered(body:Node):
@@ -97,7 +114,7 @@ func _fire():
 	bullet.player = player
 	get_parent().add_child(bullet)
 	bullet_counter += 1
-	timer.set_wait_time(1)
+	timer.set_wait_time(fire_time)
 	
 func _on_Timer_timeout():
 	if player != null and fire_activated:
@@ -114,10 +131,18 @@ func deactivate_pattern():
 	patron_1.fire = false
 	patron_2.fire = false
 
+func half_life():
+	patron_2.fire = true
+	fire_time = 0.2
+	half_life = true
+
 func take_damage(dmg_to_take:int):
 	print("enemigo recibe daño: ", dmg_to_take)
 	hp -= dmg_to_take
 	health_bar.value = hp
+	if hp < total_hp/2:
+		animation_tree.set_condition("half_life", true)
+		
 	if hp <= 0:
 		animation_tree.set_condition("death", true)
 
