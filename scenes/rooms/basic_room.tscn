@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=2]
+[gd_scene load_steps=22 format=2]
 
 [ext_resource path="res://assets/Fondo/atlas_16x.png" type="Texture" id=1]
 [ext_resource path="res://assets/Fondo/LaserGate1.PNG" type="Texture" id=2]
@@ -380,6 +380,9 @@ points = PoolVector2Array( 8, 0, 16, 0, 16, 8, 8, 8 )
 [sub_resource type="RectangleShape2D" id=27]
 extents = Vector2( 96, 64 )
 
+[sub_resource type="RectangleShape2D" id=28]
+extents = Vector2( 75, 63 )
+
 [node name="BasicRoom" type="Node2D"]
 script = ExtResource( 3 )
 
@@ -398,6 +401,11 @@ format = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RoomArea2D"]
 shape = SubResource( 27 )
+
+[node name="EnemiesSpawnArea2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemiesSpawnArea2D"]
+shape = SubResource( 28 )
 
 [node name="LeftGate" parent="." instance=ExtResource( 4 )]
 position = Vector2( -112, -4 )

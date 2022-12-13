@@ -392,6 +392,7 @@ enemies_to_spawn = 2
 
 [node name="LongVerticalRoom" parent="." instance=ExtResource( 4 )]
 position = Vector2( 704, -64 )
+enemies_to_spawn = 50
 
 [node name="LongHorizontalRoom" parent="." instance=ExtResource( 5 )]
 position = Vector2( 608, -368 )

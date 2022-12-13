@@ -14,7 +14,7 @@ var _player_entered = false
 
 # Onready variables
 onready var room_area2d = $RoomArea2D
-onready var room_shape = $RoomArea2D/CollisionShape2D
+onready var enemies_spawn_shape = $EnemiesSpawnArea2D/CollisionShape2D
 onready var protagonista = $"%Protagonista"
 onready var gates = [$LeftGate, $RightGate]
 
@@ -30,8 +30,8 @@ func _process(delta):
 
 func _spawn_enemies():
 	for i in range(enemies_to_spawn):
-		var room_x = room_shape.shape.extents.x
-		var room_y = room_shape.shape.extents.y
+		var room_x = enemies_spawn_shape.shape.extents.x
+		var room_y = enemies_spawn_shape.shape.extents.y
 		var spawn_pos = Vector2(rand_range(-room_x, room_x) + global_position.x, rand_range(-room_y, room_y) + global_position.y)
 		var enemy = ENEMY_PATH.instance()
 		enemy.position = spawn_pos
