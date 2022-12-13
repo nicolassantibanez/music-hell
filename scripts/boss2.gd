@@ -24,6 +24,8 @@ var attack_set = attack_types
 
 onready var patron_1 = $Patron1
 onready var patron_2 = $Patron2
+onready var patron_3 = $Patron3
+
 var patrones = [patron_1, patron_2]
 
 onready var timer = get_node("Timer")
@@ -43,16 +45,21 @@ var fire_time: float = 1.0
 signal spawn_points_changed()
 
 func _ready():
-	# para inicializar los patrones de ataque
+	# para inicializar los patrones de ataque ESTO NO FUNCIONA
 	patron_1.rotate_speed = 100
 	patron_1.periodo = 0.2
 	patron_1.spawn_points = 1
 	patron_1.fire = false
 	
-	patron_2.spawn_points = 60
+	patron_2.spawn_points = 40
 	patron_2.rotate_speed = 0
 	patron_2.periodo = 0.7
 	patron_2.fire = false
+	
+	patron_3.spawn_points = 20
+	patron_3.rotate_speed = 0
+	patron_3.periodo = 0.7
+	patron_3.fire = false
 	
 	rng.randomize()
 	randomize() # Para randomizar los ataques
@@ -132,7 +139,7 @@ func deactivate_pattern():
 	patron_2.fire = false
 
 func half_life():
-	patron_2.fire = true
+	patron_3.fire = true
 	fire_time = 0.2
 	half_life = true
 
@@ -140,7 +147,7 @@ func take_damage(dmg_to_take:int):
 	print("enemigo recibe daño: ", dmg_to_take)
 	hp -= dmg_to_take
 	health_bar.value = hp
-	if hp < total_hp/2:
+	if hp < total_hp/2 and not half_life:
 		animation_tree.set_condition("half_life", true)
 		
 	if hp <= 0:

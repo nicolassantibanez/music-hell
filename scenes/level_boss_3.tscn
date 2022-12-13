@@ -118,4 +118,3 @@ position = Vector2( 212, 403 )
 collision_layer = 2
 
 [node name="KinematicBody2D" parent="YSort" instance=ExtResource( 3 )]
-position = Vector2( 352, 163 )
