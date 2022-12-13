@@ -11,8 +11,17 @@ export var radius: float = 10
 export var fire: bool = true
 
 
+
 func _ready():
+	_update_parameters()
+	
+func _update_parameters():
 	var step = 2 * PI /spawn_points
+	
+	# Para eliminar los spawnpoints anteriores
+	for n in rotater.get_children():
+		rotater.remove_child(n)
+		n.queue_free()
 	
 	for i in range(spawn_points):
 		var spawn_point = Node2D.new()
@@ -23,7 +32,7 @@ func _ready():
 		
 	shoot_timer.wait_time = periodo
 	shoot_timer.start()
-	
+
 
 func _process(delta):
 	var new_rotation = rotater.rotation_degrees + rotate_speed * delta
@@ -38,3 +47,8 @@ func _on_SpawnTimer_timeout():
 			get_parent().get_parent().add_child(bullet)
 			bullet.position = s.global_position
 			bullet.rotation = s.global_rotation
+
+# falra conectarla en el ready
+func _on_Boss1_spawn_points_changed():
+	print(rotate_speed, periodo, spawn_points)
+	_update_parameters()

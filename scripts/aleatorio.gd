@@ -6,9 +6,10 @@ onready var rotater = $Rotater
 
 var rng = RandomNumberGenerator.new()
 
-var rotate_speed: float = 0
-var periodo: float = 1
-var spawn_points: int = 150
+export var fire: bool = true
+export var rotate_speed: float = 0
+export var periodo: float = 1
+export var spawn_points: int = 150
 export var radius: float = 10
 export var umbral: float = 0.5
 
@@ -35,13 +36,14 @@ func _process(delta):
 
 
 func _on_SpawnTimer_timeout():
-	for s in rotater.get_children():
-		var posibility = rng.randf() 
-		if posibility < umbral:
-			var bullet = bullet_scene.instance()
-			get_tree().root.add_child(bullet)
-			bullet.position = s.global_position
-			bullet.rotation = s.global_rotation
-		
-	shoot_timer.wait_time = rng.randf_range(0.1, 4.0)
-	shoot_timer.start()
+	if fire:
+		for s in rotater.get_children():
+			var posibility = rng.randf() 
+			if posibility < umbral:
+				var bullet = bullet_scene.instance()
+				get_tree().root.add_child(bullet)
+				bullet.position = s.global_position
+				bullet.rotation = s.global_rotation
+			
+		shoot_timer.wait_time = rng.randf_range(0.1, 4.0)
+		shoot_timer.start()

@@ -5,6 +5,10 @@
 
 [node name="PatronAleatorio" type="Node2D"]
 script = ExtResource( 1 )
+rotate_speed = 10.0
+periodo = 0.005
+spawn_points = 1
+umbral = 0.999
 
 [node name="Sprite" type="Sprite" parent="."]
 scale = Vector2( 0.1, 0.1 )
