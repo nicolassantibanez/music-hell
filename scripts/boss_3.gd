@@ -35,6 +35,7 @@ var rng = RandomNumberGenerator.new()
 var half_life = false
 
 var fire_time: float = 1.0
+signal boss_muere
 
 func _ready():
 	patron_aleatorio.fire = false
@@ -123,5 +124,6 @@ func take_damage(dmg_to_take:int):
 		animation_tree.set_condition("death", true)
 
 func queque_free2():
+	emit_signal("boss_muere")
 	queue_free()
 
