@@ -26,6 +26,7 @@ onready var health_bar = $HealthBar
 
 var primera_vez = true
 signal spawn_points_changed()
+signal boss_muere
 
 func _ready():
 	randomize() # Para randomizar los ataques
@@ -104,4 +105,5 @@ func take_damage(dmg_to_take:int):
 #		queue_free()
 
 func queque_free2():
+	emit_signal("boss_muere")
 	queue_free()

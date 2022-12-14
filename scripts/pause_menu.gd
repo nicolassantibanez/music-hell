@@ -30,9 +30,6 @@ func _on_value_changed(value: float) -> void:
 	AudioServer.set_bus_volume_db(_bus, linear2db(value))
 
 
-# TODO: Hacer que cuando haga la pausa no se pare todo 
-
-
 func _input(event):
 	if event.is_action_pressed("menu"):
 		visible = !visible
@@ -46,9 +43,6 @@ func _on_restart_pressed():
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 	
-
-
-
 func _on_quit_pressed():
 	get_tree().paused = false
 	get_tree().change_scene("res://scenes/ui/main_menu.tscn")

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/chico_rosado_rubio.png-ffcf160de7414562210d7ede09ed7294.stex"
+path="res://.import/enemigo1walk.png-ce58a47101027750636a8b688a465093.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Enemigos/chico_rosado_rubio.png"
-dest_files=[ "res://.import/chico_rosado_rubio.png-ffcf160de7414562210d7ede09ed7294.stex" ]
+source_file="res://assets/Enemigos/enemigo1walk.png"
+dest_files=[ "res://.import/enemigo1walk.png-ce58a47101027750636a8b688a465093.stex" ]
 
 [params]
 

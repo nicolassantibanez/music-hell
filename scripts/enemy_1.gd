@@ -16,6 +16,9 @@ export var speed: float = 1
 onready var timer = get_node("Timer")
 onready var protagonista = $"%Protagonista"
 
+onready var animation_tree = $AnimationTree
+onready var playback = animation_tree.get("parameters/playback")
+
 func _ready():
 	pass
 
@@ -26,6 +29,23 @@ func _physics_process(delta):
 		move = position.direction_to(player.position) * speed
 		
 	move = move.normalized()
+	var angle = rad2deg(move.angle())
+	
+	var abs_x = abs(move.x)
+	var abs_y = abs(move.y)
+	if abs_x < abs_y:
+		if move.y > 0:
+			playback.travel("down")
+		else:
+			playback.travel("up")
+	elif abs_x > abs_y: 
+		if move.x > 0:
+			playback.travel("right")
+		else:
+			playback.travel("left")
+	else:
+		playback.travel("idle")
+		
 	move = move_and_collide(move)
 
 

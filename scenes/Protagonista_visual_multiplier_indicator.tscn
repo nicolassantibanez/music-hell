@@ -583,9 +583,9 @@ states/runUp/node = SubResource( 18 )
 states/runUp/position = Vector2( 81.4817, 160.868 )
 transitions = [ "idle", "run", SubResource( 11 ), "run", "idle", SubResource( 12 ), "idleDown", "idle", SubResource( 19 ), "idle", "idleDown", SubResource( 20 ), "idle", "idleUp", SubResource( 21 ), "idleUp", "idle", SubResource( 22 ), "runUp", "idleUp", SubResource( 23 ), "idleUp", "runUp", SubResource( 24 ), "runDown", "idleDown", SubResource( 25 ), "idleDown", "runDown", SubResource( 26 ) ]
 start_node = "idle"
-graph_offset = Vector2( -16.5183, 59.8679 )
+graph_offset = Vector2( -16.5183, 72.9779 )
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id=14]
+[sub_resource type="AnimationNodeStateMachinePlayback" id=30]
 
 [node name="Protagonista" type="KinematicBody2D"]
 script = ExtResource( 2 )
@@ -621,7 +621,7 @@ anims/runUp = SubResource( 8 )
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 13 )
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource( 14 )
+parameters/playback = SubResource( 30 )
 
 [node name="Camera2D" type="Camera2D" parent="."]
 current = true
