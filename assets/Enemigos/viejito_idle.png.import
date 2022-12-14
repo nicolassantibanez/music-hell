@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/enemigo1idle.png-726fce8a5d1b6bd6d622659357ffe46b.stex"
+path="res://.import/viejito_idle.png-351b317c2ade7c474125f724f2525981.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Enemigos/enemigo1idle.png"
-dest_files=[ "res://.import/enemigo1idle.png-726fce8a5d1b6bd6d622659357ffe46b.stex" ]
+source_file="res://assets/Enemigos/viejito_idle.png"
+dest_files=[ "res://.import/viejito_idle.png-351b317c2ade7c474125f724f2525981.stex" ]
 
 [params]
 
