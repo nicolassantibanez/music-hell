@@ -1,5 +1,9 @@
 extends KinematicBody2D
 
+# Constant variables
+const min_shooting_time = 0
+const max_shooting_time = 2
+
 onready var bullet_scene = preload("res://scenes/notas/nota_morada_1.tscn")
 
 export var hp: int = 2
@@ -18,7 +22,7 @@ func _ready():
 func _physics_process(delta):
 	move = Vector2.ZERO
 	if is_instance_valid(player) and (position - player.position).length() > stop_distance:
-		print("Distancia: ", (position - player.position).length())		
+		print("Distancia: ", (position - player.position).length())
 		move = position.direction_to(player.position) * speed
 		
 	move = move.normalized()
@@ -49,6 +53,7 @@ func _fire():
 func _on_Timer_timeout():
 	if player != null and fire_activated:
 		_fire()
+		timer.wait_time = rand_range(min_shooting_time, max_shooting_time)
 
 func take_damage(dmg_to_take:int):
 	print("enemigo recibe daño: ", dmg_to_take)
