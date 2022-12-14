@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://assets/Enemigos/enemigo_1idle.png" type="Texture" id=1]
 [ext_resource path="res://scripts/enemy_1.gd" type="Script" id=2]
@@ -7,6 +7,54 @@
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 11.1857
 height = 7.71362
+
+[sub_resource type="AnimationNodeAnimation" id=9]
+animation = "down"
+
+[sub_resource type="AnimationNodeAnimation" id=10]
+animation = "idle"
+
+[sub_resource type="AnimationNodeAnimation" id=11]
+animation = "left"
+
+[sub_resource type="AnimationNodeAnimation" id=12]
+animation = "right"
+
+[sub_resource type="AnimationNodeAnimation" id=13]
+animation = "up"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=14]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=15]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=16]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=17]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=18]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=19]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=20]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=21]
+
+[sub_resource type="AnimationNodeStateMachine" id=22]
+states/down/node = SubResource( 9 )
+states/down/position = Vector2( 494, 284 )
+states/idle/node = SubResource( 10 )
+states/idle/position = Vector2( 484, 196 )
+states/left/node = SubResource( 11 )
+states/left/position = Vector2( 320, 196 )
+states/right/node = SubResource( 12 )
+states/right/position = Vector2( 657, 187 )
+states/up/node = SubResource( 13 )
+states/up/position = Vector2( 500, 71 )
+transitions = [ "idle", "left", SubResource( 14 ), "left", "idle", SubResource( 15 ), "idle", "right", SubResource( 16 ), "right", "idle", SubResource( 17 ), "up", "idle", SubResource( 18 ), "idle", "up", SubResource( 19 ), "idle", "down", SubResource( 20 ), "down", "idle", SubResource( 21 ) ]
+start_node = "idle"
+graph_offset = Vector2( 0, 119.456 )
+
+[sub_resource type="AnimationNodeStateMachinePlayback" id=23]
 
 [sub_resource type="Animation" id=3]
 length = 0.001
@@ -339,6 +387,12 @@ frame = 4
 visible = false
 scale = Vector2( 0.447, 0.433 )
 shape = SubResource( 1 )
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource( 22 )
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/playback = SubResource( 23 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 3 )
