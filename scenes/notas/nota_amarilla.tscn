@@ -85,7 +85,7 @@ anims/viajeRoja1 = SubResource( 3 )
 [node name="Timer" type="Timer" parent="."]
 
 [node name="Sprite" type="Sprite" parent="."]
-modulate = Color( 0.803922, 0, 1, 1 )
+modulate = Color( 1, 1.5, 0.04, 1 )
 scale = Vector2( 0.1, 0.1 )
 texture = ExtResource( 3 )
 hframes = 5

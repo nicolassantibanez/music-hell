@@ -124,5 +124,21 @@ position = Vector2( 71, 274 )
 collision_layer = 2
 
 [node name="Goal" parent="YSort" instance=ExtResource( 4 )]
-position = Vector2( 70, -168 )
+position = Vector2( 70, -170 )
 next_level = ExtResource( 5 )
+
+[node name="Sprite" type="Sprite" parent="YSort"]
+position = Vector2( 63, -184 )
+texture = ExtResource( 1 )
+hframes = 8
+vframes = 5
+frame = 34
+
+[node name="Sprite2" type="Sprite" parent="YSort"]
+position = Vector2( 79, -184 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 1 )
+hframes = 8
+vframes = 5
+frame = 34
