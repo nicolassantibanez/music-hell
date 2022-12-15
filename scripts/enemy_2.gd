@@ -12,7 +12,7 @@ export (float) var stop_distance = 50.0
 
 var player = null
 var move = Vector2.ZERO
-export var speed: float = 1
+export var speed: float = 0
 onready var timer = get_node("Timer")
 onready var protagonista = $"%Protagonista"
 
