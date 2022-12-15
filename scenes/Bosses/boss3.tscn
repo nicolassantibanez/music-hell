@@ -1491,7 +1491,7 @@ scale = Vector2( 1.5, 1.5 )
 texture = ExtResource( 1 )
 hframes = 2
 vframes = 4
-frame = 5
+frame = 4
 
 [node name="Area2D" type="Area2D" parent="."]
 visible = false

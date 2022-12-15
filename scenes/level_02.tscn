@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://assets/Fondo/atlas_16x.png" type="Texture" id=1]
 [ext_resource path="res://scenes/rooms/squared_lvl2_room.tscn" type="PackedScene" id=2]
@@ -7,6 +7,9 @@
 [ext_resource path="res://scenes/rooms/long_Lshape_lvl2_room.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/goal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/level_boss_2.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/Fondo/4 Walls, Floor & Doors.png" type="Texture" id=8]
+[ext_resource path="res://scenes/enemy_1_level01.tscn" type="PackedScene" id=9]
+[ext_resource path="res://scenes/enemy_2.tscn" type="PackedScene" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=14]
 points = PoolVector2Array( 8, 16, 0, 16, 0, 8, 8, 8 )
@@ -486,12 +489,18 @@ tile_data = PoolIntArray( -1048491, 6, 0, -1048490, 14, 0, -1048489, 14, 0, -104
 
 [node name="SquaredLvl2Room" parent="." instance=ExtResource( 2 )]
 position = Vector2( 384, 64 )
+enemies_list = [ ExtResource( 9 ), ExtResource( 10 ) ]
+enemies_to_spawn = PoolIntArray( 2, 2 )
 
 [node name="LongVerticalLvl2Room" parent="." instance=ExtResource( 4 )]
 position = Vector2( 704, 64 )
+enemies_list = [ ExtResource( 9 ), ExtResource( 10 ) ]
+enemies_to_spawn = PoolIntArray( 4, 6 )
 
 [node name="LongLshapeLvl2Room" parent="." instance=ExtResource( 5 )]
 position = Vector2( 1216, 64 )
+enemies_list = [ ExtResource( 9 ), ExtResource( 10 ) ]
+enemies_to_spawn = PoolIntArray( 7, 7 )
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -503,3 +512,19 @@ collision_layer = 2
 [node name="Goal" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 1400, -235 )
 next_level = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="YSort"]
+position = Vector2( 1393, -245 )
+texture = ExtResource( 8 )
+hframes = 8
+vframes = 5
+frame = 34
+
+[node name="Sprite2" type="Sprite" parent="YSort"]
+position = Vector2( 1409, -245 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 8 )
+hframes = 8
+vframes = 5
+frame = 34

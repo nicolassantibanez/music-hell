@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://assets/Fondo/atlas_16x.png" type="Texture" id=1]
 [ext_resource path="res://scenes/rooms/basic_room.tscn" type="PackedScene" id=2]
@@ -7,6 +7,7 @@
 [ext_resource path="res://scenes/rooms/long_horizontal_room.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/goal.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/level_boss.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/Fondo/4 Walls, Floor & Doors.png" type="Texture" id=8]
 
 [sub_resource type="ConvexPolygonShape2D" id=14]
 points = PoolVector2Array( 8, 16, 0, 16, 0, 8, 8, 8 )
@@ -399,9 +400,25 @@ position = Vector2( 608, -368 )
 
 [node name="Protagonista" parent="YSort" instance=ExtResource( 3 )]
 unique_name_in_owner = true
-position = Vector2( 73, 60 )
+position = Vector2( 73, 64 )
 collision_layer = 2
 
 [node name="Goal" parent="YSort" instance=ExtResource( 6 )]
 position = Vector2( 344, -523 )
 next_level = ExtResource( 7 )
+
+[node name="Sprite" type="Sprite" parent="YSort"]
+position = Vector2( 336, -533 )
+texture = ExtResource( 8 )
+hframes = 8
+vframes = 5
+frame = 34
+
+[node name="Sprite2" type="Sprite" parent="YSort"]
+position = Vector2( 352, -533 )
+rotation = 3.14159
+scale = Vector2( 1, -1 )
+texture = ExtResource( 8 )
+hframes = 8
+vframes = 5
+frame = 34
